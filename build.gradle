@@ -1,14 +1,21 @@
 buildscript {
+    ext {
+        androidGradlePlugin = '8.2.0'
+        kotlinVersion = '1.9.22'
+        googleServicesVersion = '4.4.0'
+        firebaseCrashlyticsVersion = '2.9.9'
+    }
+    
     repositories {
         google()
         mavenCentral()
         gradlePluginPortal()
     }
     dependencies {
-        classpath "com.android.tools.build:gradle:${androidGradlePlugin}"
-        classpath "org.jetbrains.kotlin:kotlin-gradle-plugin:${kotlinVersion}"
-        classpath "com.google.gms:google-services:${googleServicesVersion}"
-        classpath "com.google.firebase:firebase-crashlytics-gradle:${firebaseCrashlyticsVersion}"
+        classpath "com.android.tools.build:gradle:$androidGradlePlugin"
+        classpath "org.jetbrains.kotlin:kotlin-gradle-plugin:$kotlinVersion"
+        classpath "com.google.gms:google-services:$googleServicesVersion"
+        classpath "com.google.firebase:firebase-crashlytics-gradle:$firebaseCrashlyticsVersion"
     }
 }
 

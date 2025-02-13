@@ -23,16 +23,25 @@ android {
     buildTypes {
         debug {
             buildConfigField "String", "API_BASE_URL", "\"https://dev-api.yourdomain.com/\""
+            manifestPlaceholders = [
+                MAPS_API_KEY: "@string/maps_api_key"
+            ]
         }
         staging {
             initWith debug
             buildConfigField "String", "API_BASE_URL", "\"https://staging-api.yourdomain.com/\""
+            manifestPlaceholders = [
+                MAPS_API_KEY: "@string/maps_api_key"
+            ]
         }
         release {
             buildConfigField "String", "API_BASE_URL", "\"https://api.yourdomain.com/\""
             minifyEnabled true
             shrinkResources true
             proguardFiles getDefaultProguardFile('proguard-android-optimize.txt'), 'proguard-rules.pro'
+            manifestPlaceholders = [
+                MAPS_API_KEY: "@string/maps_api_key"
+            ]
         }
     }
     

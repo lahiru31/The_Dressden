@@ -5,10 +5,10 @@ buildscript {
         gradlePluginPortal()
     }
     dependencies {
-        classpath rootProject.ext.plugins.android
-        classpath rootProject.ext.plugins.kotlin
-        classpath rootProject.ext.plugins.googleServices
-        classpath rootProject.ext.plugins.firebaseCrashlytics
+        classpath "com.android.tools.build:gradle:${androidGradlePlugin}"
+        classpath "org.jetbrains.kotlin:kotlin-gradle-plugin:${kotlinVersion}"
+        classpath "com.google.gms:google-services:${googleServicesVersion}"
+        classpath "com.google.firebase:firebase-crashlytics-gradle:${firebaseCrashlyticsVersion}"
     }
 }
 

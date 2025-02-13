@@ -6,33 +6,28 @@ pluginManagement {
     }
 }
 
-dependencyResolutionManagement.repositories {
-    google()
-    mavenCentral()
-    gradlePluginPortal()
-    maven { url 'https://jitpack.io' }
+dependencyResolutionManagement {
+    repositoriesMode.set(RepositoriesMode.FAIL_ON_PROJECT_REPOS)
+    repositories {
+        google()
+        mavenCentral()
+        gradlePluginPortal()
+        maven { url 'https://jitpack.io' }
+    }
 }
 
 rootProject.name = "The_Dressden"
 include ':app'
 
-gradle.ext {
-    versions = [
-            kotlin: '1.9.22',
-            agp: '8.2.0',
-            googleServices: '4.4.0',
-            firebaseCrashlytics: '2.9.9'
-    ]
-
-    plugins = [
-            android: "com.android.tools.build:gradle:${versions.agp}",
-            kotlin: "org.jetbrains.kotlin:kotlin-gradle-plugin:${versions.kotlin}",
-            googleServices: "com.google.gms:google-services:${versions.googleServices}",
-            firebaseCrashlytics: "com.google.firebase:firebase-crashlytics-gradle:${versions.firebaseCrashlytics}"
-    ]
+// Define versions
+ext {
+    androidGradlePlugin = '8.2.0'
+    kotlinVersion = '1.9.22'
+    googleServicesVersion = '4.4.0'
+    firebaseCrashlyticsVersion = '2.9.9'
 }
 
-// Enable build caching
+// Configure build cache
 buildCache {
     local {
         directory = new File(rootDir, '.gradle/cache')

@@ -61,8 +61,3 @@ tasks.register('cleanCache') {
         }
     }
 }
-
-// Run cache cleanup before build
-tasks.named('build').configure {
-    dependsOn 'cleanCache'
-}

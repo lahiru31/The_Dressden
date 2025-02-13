@@ -17,11 +17,3 @@ dependencyResolutionManagement {
 
 rootProject.name = "The_Dressden"
 include ':app'
-
-// Configure build cache
-buildCache {
-    local {
-        directory = new File(rootDir, '.gradle/cache')
-        removeUnusedEntriesAfterDays = 30
-    }
-}

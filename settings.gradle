@@ -4,16 +4,6 @@ pluginManagement {
         google()
         mavenCentral()
     }
-    resolutionStrategy {
-        eachPlugin {
-            if (requested.id.id == 'com.android.application') {
-                useModule('com.android.tools.build:gradle:8.2.0')
-            }
-            if (requested.id.id == 'org.jetbrains.kotlin.android') {
-                useVersion('1.9.22')
-            }
-        }
-    }
 }
 
 dependencyResolutionManagement {
@@ -24,13 +14,18 @@ dependencyResolutionManagement {
         gradlePluginPortal()
         maven { url 'https://jitpack.io' }
     }
+}
+
+enableFeaturePreview('VERSION_CATALOGS')
+
+dependencyResolutionManagement {
     versionCatalogs {
-        libs {
+        create("libs") {
             version('kotlin', '1.9.22')
             version('agp', '8.2.0')
             
-            plugin('android-application', 'com.android.application').version('${agp}')
-            plugin('kotlin-android', 'org.jetbrains.kotlin.android').version('${kotlin}')
+            plugin('android-application', 'com.android.application').version(version('agp'))
+            plugin('kotlin-android', 'org.jetbrains.kotlin.android').version(version('kotlin'))
             plugin('google-services', 'com.google.gms.google-services').version('4.4.0')
             plugin('firebase-crashlytics', 'com.google.firebase.crashlytics').version('2.9.9')
         }

@@ -6,30 +6,17 @@ pluginManagement {
     }
 }
 
-@Suppress(['UnstableApiUsage'])
-dependencyResolutionManagement {
-    repositoriesMode.set(RepositoriesMode.PREFER_SETTINGS)
-    repositories {
-        google()
-        mavenCentral()
-        gradlePluginPortal()
-        maven { url 'https://jitpack.io' }
-    }
+dependencyResolutionManagement.repositories {
+    google()
+    mavenCentral()
+    gradlePluginPortal()
+    maven { url 'https://jitpack.io' }
 }
 
 rootProject.name = "The_Dressden"
 include ':app'
 
-// Enable build caching
-buildCache {
-    local {
-        directory = new File(rootDir, '.gradle/cache')
-        removeUnusedEntriesAfterDays = 30
-    }
-}
-
-// Define versions
-ext {
+gradle.ext {
     versions = [
             kotlin: '1.9.22',
             agp: '8.2.0',
@@ -43,4 +30,12 @@ ext {
             googleServices: "com.google.gms:google-services:${versions.googleServices}",
             firebaseCrashlytics: "com.google.firebase:firebase-crashlytics-gradle:${versions.firebaseCrashlytics}"
     ]
+}
+
+// Enable build caching
+buildCache {
+    local {
+        directory = new File(rootDir, '.gradle/cache')
+        removeUnusedEntriesAfterDays = 30
+    }
 }

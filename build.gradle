@@ -5,10 +5,10 @@ buildscript {
         gradlePluginPortal()
     }
     dependencies {
-        classpath 'com.android.tools.build:gradle:8.2.0'
-        classpath 'org.jetbrains.kotlin:kotlin-gradle-plugin:1.9.22'
-        classpath 'com.google.gms:google-services:4.4.0'
-        classpath 'com.google.firebase:firebase-crashlytics-gradle:2.9.9'
+        classpath libs.plugins.android.application.get().pluginId
+        classpath libs.plugins.kotlin.android.get().pluginId
+        classpath libs.plugins.google.services.get().pluginId
+        classpath libs.plugins.firebase.crashlytics.get().pluginId
     }
 }
 
@@ -21,6 +21,10 @@ allprojects {
     tasks.withType(org.jetbrains.kotlin.gradle.tasks.KotlinCompile).configureEach {
         kotlinOptions {
             jvmTarget = '17'
+            freeCompilerArgs += [
+                '-opt-in=kotlin.RequiresOptIn',
+                '-Xjvm-default=all'
+            ]
         }
     }
 }

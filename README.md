@@ -4,18 +4,18 @@
 
 ### Prerequisites
 - Android Studio Hedgehog or later
-- JDK 21
+- JDK 17 (Required - Do not use higher versions)
 - Android SDK 34
-- Gradle 8.10.2
-- Android Gradle Plugin (AGP) 8.8.0
+- Gradle 8.9
+- Android Gradle Plugin (AGP) 8.2.0
 
 ### Build Environment
 ```bash
 # Required Java version
-java -version  # Should show Java 21
+java -version  # Should show Java 17
 
 # Gradle version
-./gradlew --version  # Should show Gradle 8.10.2
+./gradlew --version  # Should show Gradle 8.9
 ```
 
 ### Configuration
@@ -94,6 +94,19 @@ Run tests using:
 ./gradlew connectedAndroidTest  # Instrumentation tests
 ```
 
+### Gradle Configuration
+
+The project uses:
+- Gradle 8.9 (Required - Do not use higher versions)
+- Android Gradle Plugin 8.2.0
+- JDK 17 compatibility (Required - Do not use higher versions)
+- Latest AndroidX and support libraries
+
+To update Gradle wrapper:
+```bash
+./gradlew wrapper --gradle-version 8.9
+```
+
 ### Known Issues and TODOs
 
 1. **Security**
@@ -111,19 +124,6 @@ Run tests using:
    - [ ] Add push notifications
    - [ ] Implement deep linking
 
-### Gradle Configuration
-
-The project uses:
-- Gradle 8.10.2
-- Android Gradle Plugin 8.8.0
-- JDK 21 compatibility
-- Latest AndroidX and support libraries
-
-To update Gradle wrapper:
-```bash
-./gradlew wrapper --gradle-version 8.10.2
-```
-
 ### Contributing
 
 1. Fork the repository
@@ -131,6 +131,18 @@ To update Gradle wrapper:
 3. Commit your changes (`git commit -m 'Add amazing feature'`)
 4. Push to the branch (`git push origin feature/amazing-feature`)
 5. Open a Pull Request
+
+### Important Notes
+
+1. **Java Version Compatibility**
+   - The project is configured to use Java 17
+   - Using Java versions higher than 17 will cause compatibility issues
+   - Make sure your Android Studio is using JDK 17
+
+2. **Gradle Version Compatibility**
+   - The project uses Gradle 8.9
+   - Using Gradle versions higher than 8.9 may cause compatibility issues
+   - The gradle-wrapper.properties is configured for Gradle 8.9
 
 ### License
 

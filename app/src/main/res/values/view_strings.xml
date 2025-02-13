@@ -1,0 +1,66 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <!-- Custom View Labels -->
+    <string name="expand_collapse">Expand or collapse</string>
+    <string name="loading">Loading…</string>
+    <string name="retry">Retry</string>
+    <string name="cancel">Cancel</string>
+    <string name="save">Save</string>
+    <string name="done">Done</string>
+    
+    <!-- Loading View -->
+    <string name="default_loading_message">Please wait…</string>
+    <string name="loading_error">An error occurred. Please try again.</string>
+    <string name="loading_no_network">No internet connection</string>
+    
+    <!-- Progress Button -->
+    <string name="button_loading">Processing…</string>
+    <string name="button_error">Error</string>
+    <string name="button_success">Success</string>
+    
+    <!-- Expandable Card -->
+    <string name="card_expand">Expand</string>
+    <string name="card_collapse">Collapse</string>
+    <string name="card_loading">Loading content…</string>
+    <string name="card_error">Failed to load content</string>
+    
+    <!-- Rating View -->
+    <string name="rating_empty">No rating</string>
+    <string name="rating_format">%.1f out of %d</string>
+    
+    <!-- Image View -->
+    <string name="image_loading">Loading image…</string>
+    <string name="image_error">Failed to load image</string>
+    <string name="image_content_description">Image</string>
+    
+    <!-- Chip Group -->
+    <string name="chip_group_empty">No items</string>
+    <string name="chip_group_more">+%d more</string>
+    
+    <!-- Common Actions -->
+    <string name="action_edit">Edit</string>
+    <string name="action_delete">Delete</string>
+    <string name="action_share">Share</string>
+    <string name="action_favorite">Favorite</string>
+    <string name="action_unfavorite">Unfavorite</string>
+    
+    <!-- Error Messages -->
+    <string name="error_generic">Something went wrong</string>
+    <string name="error_network">Network error</string>
+    <string name="error_timeout">Request timed out</string>
+    <string name="error_server">Server error</string>
+    <string name="error_validation">Validation error</string>
+    
+    <!-- Success Messages -->
+    <string name="success_save">Successfully saved</string>
+    <string name="success_update">Successfully updated</string>
+    <string name="success_delete">Successfully deleted</string>
+    
+    <!-- Accessibility -->
+    <string name="accessibility_loading">Loading in progress</string>
+    <string name="accessibility_expand">Expand panel</string>
+    <string name="accessibility_collapse">Collapse panel</string>
+    <string name="accessibility_rating">Rating: %1$s out of %2$d stars</string>
+    <string name="accessibility_image_loading">Loading image</string>
+    <string name="accessibility_image_error">Image failed to load</string>
+</resources>

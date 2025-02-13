@@ -1,0 +1,51 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <!-- LoadingView Attributes -->
+    <declare-styleable name="LoadingView">
+        <attr name="loadingMessage" format="string" />
+        <attr name="showProgress" format="boolean" />
+    </declare-styleable>
+
+    <!-- RatingView Attributes -->
+    <declare-styleable name="RatingView">
+        <attr name="rating" format="float" />
+        <attr name="maxRating" format="integer" />
+        <attr name="starSize" format="dimension" />
+        <attr name="starPadding" format="dimension" />
+        <attr name="starColor" format="color" />
+        <attr name="starBackgroundColor" format="color" />
+    </declare-styleable>
+
+    <!-- ExpandableCardView Attributes -->
+    <declare-styleable name="ExpandableCardView">
+        <attr name="expanded" format="boolean" />
+        <attr name="animationDuration" format="integer" />
+        <attr name="collapsedHeight" format="dimension" />
+    </declare-styleable>
+
+    <!-- ProgressButton Attributes -->
+    <declare-styleable name="ProgressButton">
+        <attr name="buttonText" format="string" />
+        <attr name="loadingText" format="string" />
+        <attr name="isLoading" format="boolean" />
+        <attr name="progressColor" format="color" />
+        <attr name="buttonTextColor" format="color" />
+        <attr name="buttonBackgroundColor" format="color" />
+    </declare-styleable>
+
+    <!-- ChipGroupFlow Attributes -->
+    <declare-styleable name="ChipGroupFlow">
+        <attr name="lineSpacing" format="dimension" />
+        <attr name="itemSpacing" format="dimension" />
+        <attr name="maxLines" format="integer" />
+        <attr name="chipStyle" format="reference" />
+    </declare-styleable>
+
+    <!-- CircularImageView Attributes -->
+    <declare-styleable name="CircularImageView">
+        <attr name="borderWidth" format="dimension" />
+        <attr name="borderColor" format="color" />
+        <attr name="placeholderImage" format="reference" />
+        <attr name="errorImage" format="reference" />
+    </declare-styleable>
+</resources>

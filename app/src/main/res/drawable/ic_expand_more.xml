@@ -1,0 +1,65 @@
+<?xml version="1.0" encoding="utf-8"?>
+<animated-selector xmlns:android="http://schemas.android.com/apk/res/android">
+    <item
+        android:id="@+id/expanded"
+        android:drawable="@drawable/ic_expand_less"
+        android:state_checked="true" />
+
+    <item
+        android:id="@+id/collapsed"
+        android:drawable="@drawable/ic_expand_more_static" />
+
+    <transition
+        android:drawable="@drawable/expand_more_to_less"
+        android:fromId="@id/collapsed"
+        android:toId="@id/expanded" />
+
+    <transition
+        android:drawable="@drawable/expand_less_to_more"
+        android:fromId="@id/expanded"
+        android:toId="@id/collapsed" />
+</animated-selector>
+
+<!-- Static expand more icon -->
+<vector
+    android:name="ic_expand_more_static"
+    android:width="24dp"
+    android:height="24dp"
+    android:viewportWidth="24"
+    android:viewportHeight="24">
+    <path
+        android:fillColor="#000000"
+        android:pathData="M16.59,8.59L12,13.17 7.41,8.59 6,10l6,6 6,-6z"/>
+</vector>
+
+<!-- Static expand less icon -->
+<vector
+    android:name="ic_expand_less"
+    android:width="24dp"
+    android:height="24dp"
+    android:viewportWidth="24"
+    android:viewportHeight="24">
+    <path
+        android:fillColor="#000000"
+        android:pathData="M12,8l-6,6 1.41,1.41L12,10.83l4.59,4.58L18,14z"/>
+</vector>
+
+<!-- Animation from more to less -->
+<animated-vector
+    android:name="expand_more_to_less"
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    android:drawable="@drawable/ic_expand_more_static">
+    <target
+        android:name="rotationGroup"
+        android:animation="@animator/rotation_180" />
+</animated-vector>
+
+<!-- Animation from less to more -->
+<animated-vector
+    android:name="expand_less_to_more"
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    android:drawable="@drawable/ic_expand_less">
+    <target
+        android:name="rotationGroup"
+        android:animation="@animator/rotation_180_reverse" />
+</animated-vector>

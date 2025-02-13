@@ -6,6 +6,7 @@ pluginManagement {
     }
 }
 
+@Suppress(['UnstableApiUsage'])
 dependencyResolutionManagement {
     repositoriesMode.set(RepositoriesMode.PREFER_SETTINGS)
     repositories {
@@ -16,27 +17,8 @@ dependencyResolutionManagement {
     }
 }
 
-enableFeaturePreview('VERSION_CATALOGS')
-
-dependencyResolutionManagement {
-    versionCatalogs {
-        create("libs") {
-            version('kotlin', '1.9.22')
-            version('agp', '8.2.0')
-            
-            plugin('android-application', 'com.android.application').version(version('agp'))
-            plugin('kotlin-android', 'org.jetbrains.kotlin.android').version(version('kotlin'))
-            plugin('google-services', 'com.google.gms.google-services').version('4.4.0')
-            plugin('firebase-crashlytics', 'com.google.firebase.crashlytics').version('2.9.9')
-        }
-    }
-}
-
 rootProject.name = "The_Dressden"
 include ':app'
-
-// Enable configuration caching
-gradle.startParameter.configurationCache = true
 
 // Enable build caching
 buildCache {
@@ -44,4 +26,21 @@ buildCache {
         directory = new File(rootDir, '.gradle/cache')
         removeUnusedEntriesAfterDays = 30
     }
+}
+
+// Define versions
+ext {
+    versions = [
+            kotlin: '1.9.22',
+            agp: '8.2.0',
+            googleServices: '4.4.0',
+            firebaseCrashlytics: '2.9.9'
+    ]
+
+    plugins = [
+            android: "com.android.tools.build:gradle:${versions.agp}",
+            kotlin: "org.jetbrains.kotlin:kotlin-gradle-plugin:${versions.kotlin}",
+            googleServices: "com.google.gms:google-services:${versions.googleServices}",
+            firebaseCrashlytics: "com.google.firebase:firebase-crashlytics-gradle:${versions.firebaseCrashlytics}"
+    ]
 }

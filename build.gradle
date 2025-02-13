@@ -34,3 +34,34 @@ allprojects {
         }
     }
 }
+
+// Configure Gradle cache settings
+gradle.projectsLoaded {
+    rootProject.allprojects {
+        buildDir = layout.buildDirectory.dir("${rootProject.buildDir}/${project.name}").get().asFile
+    }
+}
+
+// Clean up old cache directories
+tasks.register('cleanCache') {
+    doLast {
+        def cacheDir = new File(gradle.gradleUserHomeDir, 'caches')
+        if (cacheDir.exists()) {
+            cacheDir.eachDir { dir ->
+                try {
+                    if (dir.name != '8.10.2') {
+                        dir.deleteDir()
+                        println "Deleted old cache directory: ${dir.name}"
+                    }
+                } catch (Exception e) {
+                    println "Failed to delete directory ${dir.name}: ${e.message}"
+                }
+            }
+        }
+    }
+}
+
+// Run cache cleanup before build
+tasks.named('build').configure {
+    dependsOn 'cleanCache'
+}

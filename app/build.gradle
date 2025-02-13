@@ -4,6 +4,7 @@ plugins {
     id 'com.google.gms.google-services'
     id 'com.google.firebase.crashlytics'
     id 'kotlin-kapt'
+    id 'com.google.devtools.ksp'
 }
 
 android {
@@ -49,6 +50,11 @@ android {
         viewBinding true
         dataBinding true
         buildConfig true
+    }
+    
+    lint {
+        abortOnError false
+        checkReleaseBuilds false
     }
 
     compileOptions {

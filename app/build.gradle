@@ -20,7 +20,6 @@ android {
         testInstrumentationRunner "androidx.test.runner.AndroidJUnitRunner"
     }
 
-    // Different API URLs for different build types
     buildTypes {
         debug {
             buildConfigField "String", "API_BASE_URL", "\"https://dev-api.yourdomain.com/\""
@@ -34,6 +33,7 @@ android {
             minifyEnabled true
             shrinkResources true
             proguardFiles getDefaultProguardFile('proguard-android-optimize.txt'), 'proguard-rules.pro'
+            signingConfig signingConfigs.release
         }
     }
 

@@ -42,7 +42,7 @@ Build optimizations enabled:
 1. Clone the repository
 2. Open in Android Studio
 3. Sync project with Gradle files
-4. Run the following commands:
+4. Run:
 ```bash
 # Clean project
 ./gradlew clean
@@ -94,6 +94,11 @@ Build optimizations enabled:
    - minSdk: 24
    - targetSdk: 34
    - compileSdk: 34
+
+4. Build Types:
+   - Debug: Development environment
+   - Staging: Testing environment
+   - Release: Production environment with optimizations
 
 ### License
 This project is licensed under the MIT License - see the LICENSE file for details.

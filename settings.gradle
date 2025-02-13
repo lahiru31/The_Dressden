@@ -1,8 +1,8 @@
 pluginManagement {
     repositories {
-        gradlePluginPortal()
         google()
         mavenCentral()
+        gradlePluginPortal()
     }
 }
 
@@ -11,17 +11,12 @@ dependencyResolutionManagement {
     repositories {
         google()
         mavenCentral()
-        gradlePluginPortal()
         maven { url 'https://jitpack.io' }
     }
 }
 
 rootProject.name = "The_Dressden"
 include ':app'
-
-gradle {
-    startParameter.configurationCache = true
-}
 
 // Configure build cache
 buildCache {

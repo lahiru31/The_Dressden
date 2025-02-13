@@ -4,7 +4,7 @@ buildscript {
         mavenCentral()
     }
     dependencies {
-        classpath 'com.android.tools.build:gradle:8.8.0'
+        classpath 'com.android.tools.build:gradle:8.2.0'
         classpath 'org.jetbrains.kotlin:kotlin-gradle-plugin:1.9.22'
         classpath 'com.google.gms:google-services:4.4.0'
         classpath 'com.google.firebase:firebase-crashlytics-gradle:2.9.9'
@@ -25,12 +25,12 @@ tasks.register('clean', Delete) {
 // Set JDK compatibility for all projects
 allprojects {
     tasks.withType(JavaCompile).configureEach {
-        sourceCompatibility = JavaVersion.VERSION_21
-        targetCompatibility = JavaVersion.VERSION_21
+        sourceCompatibility = JavaVersion.VERSION_17
+        targetCompatibility = JavaVersion.VERSION_17
     }
     tasks.withType(org.jetbrains.kotlin.gradle.tasks.KotlinCompile).configureEach {
         kotlinOptions {
-            jvmTarget = '21'
+            jvmTarget = '17'
         }
     }
 }
@@ -49,7 +49,7 @@ tasks.register('cleanCache') {
         if (cacheDir.exists()) {
             cacheDir.eachDir { dir ->
                 try {
-                    if (dir.name != '8.10.2') {
+                    if (dir.name != '8.9') {
                         dir.deleteDir()
                         println "Deleted old cache directory: ${dir.name}"
                     }

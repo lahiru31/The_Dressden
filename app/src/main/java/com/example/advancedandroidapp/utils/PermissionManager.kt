@@ -5,56 +5,40 @@ import android.content.Context
 import android.content.pm.PackageManager
 import android.os.Build
 import androidx.activity.result.ActivityResultLauncher
+import androidx.activity.result.contract.ActivityResultContracts
 import androidx.core.content.ContextCompat
-import dagger.hilt.android.qualifiers.ApplicationContext
+import androidx.fragment.app.Fragment
 import javax.inject.Inject
 import javax.inject.Singleton
 
 @Singleton
 class PermissionManager @Inject constructor(
-    @ApplicationContext private val context: Context
+    private val context: Context
 ) {
-    // Permission groups
-    val locationPermissions = if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.Q) {
-        arrayOf(
-            Manifest.permission.ACCESS_FINE_LOCATION,
-            Manifest.permission.ACCESS_COARSE_LOCATION,
-            Manifest.permission.ACCESS_BACKGROUND_LOCATION
-        )
-    } else {
-        arrayOf(
+    companion object {
+        val LOCATION_PERMISSIONS = arrayOf(
             Manifest.permission.ACCESS_FINE_LOCATION,
             Manifest.permission.ACCESS_COARSE_LOCATION
         )
+
+        val MEDIA_PERMISSIONS = if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.TIRAMISU) {
+            arrayOf(
+                Manifest.permission.READ_MEDIA_IMAGES,
+                Manifest.permission.READ_MEDIA_VIDEO
+            )
+        } else {
+            arrayOf(
+                Manifest.permission.READ_EXTERNAL_STORAGE,
+                Manifest.permission.WRITE_EXTERNAL_STORAGE
+            )
+        }
+
+        val NOTIFICATION_PERMISSION = if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.TIRAMISU) {
+            arrayOf(Manifest.permission.POST_NOTIFICATIONS)
+        } else {
+            emptyArray()
+        }
     }
-
-    val cameraPermissions = arrayOf(
-        Manifest.permission.CAMERA
-    )
-
-    val storagePermissions = if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.TIRAMISU) {
-        arrayOf(
-            Manifest.permission.READ_MEDIA_IMAGES,
-            Manifest.permission.READ_MEDIA_VIDEO,
-            Manifest.permission.READ_MEDIA_AUDIO
-        )
-    } else {
-        arrayOf(
-            Manifest.permission.READ_EXTERNAL_STORAGE,
-            Manifest.permission.WRITE_EXTERNAL_STORAGE
-        )
-    }
-
-    val notificationPermissions = if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.TIRAMISU) {
-        arrayOf(Manifest.permission.POST_NOTIFICATIONS)
-    } else {
-        emptyArray()
-    }
-
-    val phonePermissions = arrayOf(
-        Manifest.permission.CALL_PHONE,
-        Manifest.permission.SEND_SMS
-    )
 
     fun hasPermissions(permissions: Array<String>): Boolean {
         return permissions.all {
@@ -62,76 +46,107 @@ class PermissionManager @Inject constructor(
         }
     }
 
-    fun requestPermissions(
-        permissions: Array<String>,
-        launcher: ActivityResultLauncher<Array<String>>,
-        onResult: (Map<String, Boolean>) -> Unit
-    ) {
-        val permissionsToRequest = permissions.filter {
-            ContextCompat.checkSelfPermission(context, it) != PackageManager.PERMISSION_GRANTED
-        }.toTypedArray()
-
-        if (permissionsToRequest.isNotEmpty()) {
-            launcher.launch(permissionsToRequest)
-        } else {
-            onResult(permissions.associateWith { true })
+    fun registerForPermissionResult(
+        fragment: Fragment,
+        onResult: (Boolean) -> Unit
+    ): ActivityResultLauncher<Array<String>> {
+        return fragment.registerForActivityResult(
+            ActivityResultContracts.RequestMultiplePermissions()
+        ) { permissions ->
+            val allGranted = permissions.entries.all { it.value }
+            onResult(allGranted)
         }
     }
 
-    fun shouldShowRationale(
-        permissions: Array<String>,
-        activity: androidx.fragment.app.FragmentActivity
-    ): Boolean {
-        return permissions.any {
-            activity.shouldShowRequestPermissionRationale(it)
+    fun shouldShowRationale(fragment: Fragment, permissions: Array<String>): Boolean {
+        return permissions.any { permission ->
+            fragment.shouldShowRequestPermissionRationale(permission)
         }
     }
 
-    // Location specific checks
-    fun hasLocationPermissions(): Boolean = hasPermissions(locationPermissions)
-    fun hasBackgroundLocationPermission(): Boolean {
-        return if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.Q) {
-            ContextCompat.checkSelfPermission(
-                context,
-                Manifest.permission.ACCESS_BACKGROUND_LOCATION
-            ) == PackageManager.PERMISSION_GRANTED
-        } else {
-            true
-        }
-    }
-
-    // Camera specific checks
-    fun hasCameraPermission(): Boolean = hasPermissions(cameraPermissions)
-
-    // Storage specific checks
-    fun hasStoragePermissions(): Boolean = hasPermissions(storagePermissions)
-
-    // Notification specific checks
-    fun hasNotificationPermission(): Boolean {
-        return if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.TIRAMISU) {
-            hasPermissions(notificationPermissions)
-        } else {
-            true
-        }
-    }
-
-    // Phone specific checks
-    fun hasPhonePermissions(): Boolean = hasPermissions(phonePermissions)
-
-    companion object {
-        const val PERMISSION_REQUEST_CODE = 123
+    // Extension function to check specific permissions
+    fun hasLocationPermissions() = hasPermissions(LOCATION_PERMISSIONS)
+    fun hasMediaPermissions() = hasPermissions(MEDIA_PERMISSIONS)
+    fun hasNotificationPermission() = if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.TIRAMISU) {
+        hasPermissions(NOTIFICATION_PERMISSION)
+    } else {
+        true
     }
 }
 
-sealed class PermissionResult {
-    object Granted : PermissionResult()
-    object Denied : PermissionResult()
-    object PermanentlyDenied : PermissionResult()
-    object ShowRationale : PermissionResult()
+// Extension functions for Fragment
+fun Fragment.requestLocationPermissions(
+    permissionManager: PermissionManager,
+    onResult: (Boolean) -> Unit
+) {
+    val launcher = permissionManager.registerForPermissionResult(this, onResult)
+    when {
+        permissionManager.hasLocationPermissions() -> onResult(true)
+        permissionManager.shouldShowRationale(this, PermissionManager.LOCATION_PERMISSIONS) -> {
+            // Show rationale dialog
+            showPermissionRationaleDialog(
+                "Location Permission",
+                "Location permission is required to show your current location on the map.",
+                onPositive = { launcher.launch(PermissionManager.LOCATION_PERMISSIONS) },
+                onNegative = { onResult(false) }
+            )
+        }
+        else -> launcher.launch(PermissionManager.LOCATION_PERMISSIONS)
+    }
 }
 
-data class PermissionState(
-    val permission: String,
-    val granted: Boolean,
-    val shouldShowRationale: Boolean
-)
+fun Fragment.requestMediaPermissions(
+    permissionManager: PermissionManager,
+    onResult: (Boolean) -> Unit
+) {
+    val launcher = permissionManager.registerForPermissionResult(this, onResult)
+    when {
+        permissionManager.hasMediaPermissions() -> onResult(true)
+        permissionManager.shouldShowRationale(this, PermissionManager.MEDIA_PERMISSIONS) -> {
+            showPermissionRationaleDialog(
+                "Media Permission",
+                "Media permission is required to access photos and videos.",
+                onPositive = { launcher.launch(PermissionManager.MEDIA_PERMISSIONS) },
+                onNegative = { onResult(false) }
+            )
+        }
+        else -> launcher.launch(PermissionManager.MEDIA_PERMISSIONS)
+    }
+}
+
+fun Fragment.requestNotificationPermission(
+    permissionManager: PermissionManager,
+    onResult: (Boolean) -> Unit
+) {
+    if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.TIRAMISU) {
+        val launcher = permissionManager.registerForPermissionResult(this, onResult)
+        when {
+            permissionManager.hasNotificationPermission() -> onResult(true)
+            permissionManager.shouldShowRationale(this, PermissionManager.NOTIFICATION_PERMISSION) -> {
+                showPermissionRationaleDialog(
+                    "Notification Permission",
+                    "Notification permission is required to receive important updates.",
+                    onPositive = { launcher.launch(PermissionManager.NOTIFICATION_PERMISSION) },
+                    onNegative = { onResult(false) }
+                )
+            }
+            else -> launcher.launch(PermissionManager.NOTIFICATION_PERMISSION)
+        }
+    } else {
+        onResult(true)
+    }
+}
+
+private fun Fragment.showPermissionRationaleDialog(
+    title: String,
+    message: String,
+    onPositive: () -> Unit,
+    onNegative: () -> Unit
+) {
+    androidx.appcompat.app.AlertDialog.Builder(requireContext())
+        .setTitle(title)
+        .setMessage(message)
+        .setPositiveButton("Grant") { _, _ -> onPositive() }
+        .setNegativeButton("Deny") { _, _ -> onNegative() }
+        .show()
+}

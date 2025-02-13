@@ -22,19 +22,50 @@ class MainRepository @Inject constructor(
     private val networkUtils: NetworkUtils
 ) {
     // User Profile Operations
-    suspend fun login(email: String, password: String): ApiResponse<User> {
-        return try {
-            val response = apiService.login(mapOf(
-                "email" to email,
-                "password" to password
-            ))
-            if (response.isSuccessful && response.body() != null) {
-                ApiResponse.Success(response.body()!!)
-            } else {
-                ApiResponse.Error(response.code(), response.message())
+    suspend fun login(email: String, password: String): ApiResponse<User> = withContext(Dispatchers.IO) {
+        try {
+            if (!networkUtils.isNetworkAvailable()) {
+                return@withContext ApiResponse.Error(
+                    code = -1,
+                    message = "No internet connection available"
+                )
+            }
+
+            executeWithRetry {
+                val response = apiService.login(mapOf(
+                    "email" to email,
+                    "password" to password
+                ))
+                
+                when {
+                    response.isSuccessful && response.body() != null -> {
+                        val user = response.body()!!
+                        // Cache user data
+                        appDatabase.userDao().insertUser(user)
+                        ApiResponse.Success(user)
+                    }
+                    response.code() == 401 -> {
+                        ApiResponse.Error(
+                            code = 401,
+                            message = "Invalid credentials",
+                            errorBody = parseErrorResponse(response.errorBody())
+                        )
+                    }
+                    else -> {
+                        ApiResponse.Error(
+                            code = response.code(),
+                            message = response.message(),
+                            errorBody = parseErrorResponse(response.errorBody())
+                        )
+                    }
+                }
             }
         } catch (e: Exception) {
-            ApiResponse.Error(-1, e.message ?: "Unknown error occurred")
+            Timber.e(e, "Login failed")
+            ApiResponse.Error(
+                code = -1,
+                message = e.localizedMessage ?: "An unexpected error occurred"
+            )
         }
     }
 
@@ -166,8 +197,50 @@ class MainRepository @Inject constructor(
         }
     }.flowOn(Dispatchers.IO)
 
+    private suspend fun executeWithRetry<T>(
+        maxAttempts: Int = 3,
+        initialDelay: Long = 100,
+        maxDelay: Long = 1000,
+        factor: Double = 2.0,
+        block: suspend () -> T
+    ): T {
+        var currentDelay = initialDelay
+        repeat(maxAttempts - 1) { attempt ->
+            try {
+                return block()
+            } catch (e: Exception) {
+                Timber.e(e, "Attempt ${attempt + 1} failed")
+                if (e is IOException) {
+                    delay(currentDelay)
+                    currentDelay = (currentDelay * factor).toLong().coerceAtMost(maxDelay)
+                } else {
+                    throw e
+                }
+            }
+        }
+        return block() // last attempt
+    }
+
     private fun getCurrentUserToken(): String {
-        // Implement token retrieval logic
-        return ""
+        return preferencesManager.getToken() ?: throw AuthenticationException("No valid token found")
+    }
+
+    private fun parseErrorResponse(errorBody: ResponseBody?): ErrorResponse? {
+        return try {
+            errorBody?.string()?.let { 
+                Gson().fromJson(it, ErrorResponse::class.java)
+            }
+        } catch (e: Exception) {
+            Timber.e(e, "Failed to parse error response")
+            null
+        }
+    }
+
+    private suspend fun cleanupOldCache() {
+        val thirtyDaysAgo = System.currentTimeMillis() - TimeUnit.DAYS.toMillis(30)
+        appDatabase.apply {
+            locationDao().deleteLocationsOlderThan(thirtyDaysAgo)
+            userProfileDao().deleteProfilesOlderThan(thirtyDaysAgo)
+        }
     }
 }

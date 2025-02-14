@@ -22,7 +22,7 @@
     
     <!-- Rating View -->
     <string name="rating_empty">No rating</string>
-    <string name="rating_format">%.1f out of %d</string>
+    <string name="rating_format" formatted="true">%1$.1f out of %2$d</string>
     
     <!-- Image View -->
     <string name="image_loading">Loading image…</string>
@@ -31,7 +31,7 @@
     
     <!-- Chip Group -->
     <string name="chip_group_empty">No items</string>
-    <string name="chip_group_more">+%d more</string>
+    <string name="chip_group_more">+%1$d more</string>
     
     <!-- Common Actions -->
     <string name="action_edit">Edit</string>

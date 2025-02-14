@@ -2,10 +2,6 @@
 <resources>
     <!-- Custom View Labels -->
     <string name="expand_collapse">Expand or collapse</string>
-    <string name="loading">Loading…</string>
-    <string name="retry">Retry</string>
-    <string name="cancel">Cancel</string>
-    <string name="save">Save</string>
     <string name="done">Done</string>
     
     <!-- Loading View -->
@@ -46,13 +42,11 @@
     
     <!-- Error Messages -->
     <string name="error_generic">Something went wrong</string>
-    <string name="error_network">Network error</string>
     <string name="error_timeout">Request timed out</string>
     <string name="error_server">Server error</string>
     <string name="error_validation">Validation error</string>
     
     <!-- Success Messages -->
-    <string name="success_save">Successfully saved</string>
     <string name="success_update">Successfully updated</string>
     <string name="success_delete">Successfully deleted</string>
     

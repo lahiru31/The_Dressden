@@ -59,6 +59,24 @@
     <string name="enable_location_services">Please enable location services</string>
     <string name="current_location">Current Location</string>
     <string name="search_location">Search Location</string>
+    <string name="explore">Explore</string>
+    <string name="nearby_locations">Nearby Locations</string>
+    <string name="no_locations_found">No locations found</string>
+    <string name="add_new_location">Add New Location</string>
+    <string name="restaurants">Restaurants</string>
+    <string name="hotels">Hotels</string>
+    <string name="attractions">Attractions</string>
+    <string name="shopping">Shopping</string>
+    <string name="location_image">Location Image</string>
+
+    <!-- Profile -->
+    <string name="personal_info">Personal Information</string>
+    <string name="full_name">Full Name</string>
+    <string name="bio">Bio</string>
+    <string name="contact_info">Contact Information</string>
+    <string name="phone">Phone</string>
+    <string name="my_locations">My Locations</string>
+    <string name="edit_profile">Edit Profile</string>
 
     <!-- Settings -->
     <string name="notifications_enabled">Enable Notifications</string>

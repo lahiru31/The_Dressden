@@ -9,6 +9,8 @@
     <color name="surface">#FFFFFFFF</color>
     <color name="error">#FFB00020</color>
     <color name="text_primary">#DE000000</color>
+    <color name="text_secondary">#99000000</color>
+    <color name="warning">#FFA000</color>
 
     <!-- Standard Colors -->
     <color name="purple_200">#FFBB86FC</color>

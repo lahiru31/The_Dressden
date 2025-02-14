@@ -19,6 +19,11 @@
     <string name="save">Save</string>
     <string name="cancel">Cancel</string>
     <string name="retry">Retry</string>
+    <string name="directions">Directions</string>
+    <string name="view_details">View Details</string>
+    <string name="forgot_password">Forgot Password?</string>
+    <string name="or">or</string>
+    <string name="continue_with_google">Continue with Google</string>
 
     <!-- Form Labels -->
     <string name="email">Email</string>

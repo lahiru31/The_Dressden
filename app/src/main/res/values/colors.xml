@@ -6,7 +6,9 @@
     <color name="secondary">#FF03DAC5</color>
     <color name="secondary_dark">#FF018786</color>
     <color name="background">#FFFFFFFF</color>
-    <color name="scrim">#52000000</color>
+    <color name="surface">#FFFFFFFF</color>
+    <color name="error">#FFB00020</color>
+    <color name="text_primary">#DE000000</color>
 
     <!-- Standard Colors -->
     <color name="purple_200">#FFBB86FC</color>
@@ -18,8 +20,15 @@
     <color name="white">#FFFFFFFF</color>
 
     <!-- Gray Scale -->
+    <color name="gray_100">#FFF5F5F5</color>
+    <color name="gray_200">#FFEEEEEE</color>
     <color name="gray_300">#FFE0E0E0</color>
+    <color name="gray_400">#FFBDBDBD</color>
+    <color name="gray_500">#FF9E9E9E</color>
 
     <!-- Launcher Icon -->
     <color name="ic_launcher_background">#FFFFFF</color>
+
+    <!-- Scrim -->
+    <color name="scrim">#52000000</color>
 </resources>

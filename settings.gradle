@@ -23,7 +23,7 @@ dependencyResolutionManagement {
     versionCatalogs {
         libs {
             version('kotlin', '1.9.22')
-            version('agp', '8.3.0')
+            version('agp', '8.8.0') // Updated AGP version
             version('ksp', '1.9.22-1.0.17')
         }
     }

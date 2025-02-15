@@ -3,19 +3,9 @@ package com.example.advancedandroidapp.data.local
 import androidx.room.Database
 import androidx.room.RoomDatabase
 import androidx.room.TypeConverters
-import androidx.room.migration.Migration
-import androidx.sqlite.db.SupportSQLiteDatabase
-import com.example.advancedandroidapp.data.local.dao.CachedLocationDao
-import com.example.advancedandroidapp.data.local.dao.OfflineActionDao
-import com.example.advancedandroidapp.data.local.dao.UserSettingsDao
-import com.example.advancedandroidapp.data.local.dao.LocationDao
-import com.example.advancedandroidapp.data.local.dao.UserProfileDao
-import com.example.advancedandroidapp.data.models.Location
-import com.example.advancedandroidapp.data.models.UserProfile
-import com.example.advancedandroidapp.data.models.UserSettings
-import com.example.advancedandroidapp.data.models.CachedLocation
-import com.example.advancedandroidapp.data.models.OfflineAction
+import com.example.advancedandroidapp.data.local.dao.*
 import com.example.advancedandroidapp.data.local.converters.*
+import com.example.advancedandroidapp.data.models.*
 
 @Database(
     entities = [

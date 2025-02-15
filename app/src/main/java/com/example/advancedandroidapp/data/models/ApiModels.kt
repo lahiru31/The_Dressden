@@ -1,54 +1,38 @@
 package com.example.advancedandroidapp.data.models
 
-sealed class ApiResponse<out T> {
-    data class Success<T>(val data: T) : ApiResponse<T>()
-    data class Error<T>(
-        val code: Int,
-        val message: String,
-        val errorBody: ErrorResponse? = null
-    ) : ApiResponse<T>()
-    data class Loading<T>(val isLoading: Boolean = true) : ApiResponse<T>()
-}
+import com.google.gson.annotations.SerializedName
+import java.util.Date
 
-data class ErrorResponse(
-    val status: Int,
-    val message: String,
-    val errors: List<String>? = null,
-    val timestamp: Long = System.currentTimeMillis()
+data class User(
+    @SerializedName("id")
+    val id: String,
+    
+    @SerializedName("email")
+    val email: String,
+    
+    @SerializedName("token")
+    val token: String,
+    
+    @SerializedName("created_at")
+    val createdAt: Date
 )
-
-class AuthenticationException(message: String) : Exception(message)
-
-data class NetworkResult<out T>(
-    val status: Status,
-    val data: T?,
-    val error: ErrorResponse?,
-    val message: String?
-) {
-    companion object {
-        fun <T> success(data: T?): NetworkResult<T> {
-            return NetworkResult(Status.SUCCESS, data, null, null)
-        }
-
-        fun <T> error(message: String, error: ErrorResponse? = null): NetworkResult<T> {
-            return NetworkResult(Status.ERROR, null, error, message)
-        }
-
-        fun <T> loading(): NetworkResult<T> {
-            return NetworkResult(Status.LOADING, null, null, null)
-        }
-    }
-}
-
-enum class Status {
-    SUCCESS,
-    ERROR,
-    LOADING
-}
 
 data class MediaUploadResponse(
+    @SerializedName("url")
     val url: String,
+    
+    @SerializedName("type")
     val type: String,
+    
+    @SerializedName("size")
     val size: Long,
-    val uploadedAt: java.util.Date
+    
+    @SerializedName("uploaded_at")
+    val uploadedAt: Date
 )
+
+sealed class ApiResponse<out T> {
+    data class Success<out T>(val data: T) : ApiResponse<T>()
+    data class Error(val code: Int, val message: String) : ApiResponse<Nothing>()
+    object Loading : ApiResponse<Nothing>()
+}

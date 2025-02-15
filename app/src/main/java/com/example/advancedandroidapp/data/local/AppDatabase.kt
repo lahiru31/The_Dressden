@@ -3,6 +3,11 @@ package com.example.advancedandroidapp.data.local
 import androidx.room.Database
 import androidx.room.RoomDatabase
 import androidx.room.TypeConverters
+import androidx.room.migration.Migration
+import androidx.sqlite.db.SupportSQLiteDatabase
+import com.example.advancedandroidapp.data.local.dao.CachedLocationDao
+import com.example.advancedandroidapp.data.local.dao.OfflineActionDao
+import com.example.advancedandroidapp.data.local.dao.UserSettingsDao
 import com.example.advancedandroidapp.data.local.dao.LocationDao
 import com.example.advancedandroidapp.data.local.dao.UserProfileDao
 import com.example.advancedandroidapp.data.models.Location
@@ -42,7 +47,7 @@ abstract class AppDatabase : RoomDatabase() {
         const val DATABASE_NAME = "the_dressden_db"
 
         val MIGRATION_1_2 = object : Migration(1, 2) {
-            override fun migrate(database: SchemaMigration) {
+            override fun migrate(database: SupportSQLiteDatabase) {
                 // Add UserSettings table
                 database.execSQL("""
                     CREATE TABLE IF NOT EXISTS user_settings (

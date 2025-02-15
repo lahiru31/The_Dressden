@@ -1,7 +1,12 @@
 package com.example.advancedandroidapp.data.models
 
+import androidx.room.ColumnInfo
 import androidx.room.Entity
 import androidx.room.PrimaryKey
+import androidx.room.TypeConverters
+import com.example.advancedandroidapp.data.local.converters.DateConverter
+import com.example.advancedandroidapp.data.local.converters.ListConverter
+import com.example.advancedandroidapp.data.local.converters.LocationConverter
 import com.google.gson.annotations.SerializedName
 import java.util.Date
 
@@ -38,6 +43,7 @@ data class UserProfile(
     val phoneNumber: String?,
     @SerializedName("updated_at")
     @ColumnInfo(name = "updated_at")
+    @TypeConverters(DateConverter::class)
     val updatedAt: Date
 )
 
@@ -69,9 +75,11 @@ data class Location(
     val createdBy: String,
     @SerializedName("created_at")
     @ColumnInfo(name = "created_at")
+    @TypeConverters(DateConverter::class)
     val createdAt: Date,
     @SerializedName("updated_at")
     @ColumnInfo(name = "updated_at")
+    @TypeConverters(DateConverter::class)
     val updatedAt: Date
 )
 
@@ -112,7 +120,9 @@ sealed class ApiResponse<out T> {
 data class CachedLocation(
     @PrimaryKey
     val id: String,
+    @TypeConverters(LocationConverter::class)
     val location: Location,
+    @TypeConverters(DateConverter::class)
     val lastUpdated: Date
 )
 
@@ -124,6 +134,7 @@ data class OfflineAction(
     val entityType: String, // Location, UserProfile, etc.
     val entityId: String,
     val data: String, // JSON serialized data
+    @TypeConverters(DateConverter::class)
     val timestamp: Date,
     val synced: Boolean = false
 )

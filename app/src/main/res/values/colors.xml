@@ -28,6 +28,8 @@
     <color name="transparent">#00000000</color>
     <color name="background">#FFFFFF</color>
     <color name="scrim">#52000000</color>
+    <color name="surface">#FFFFFF</color>
+    <color name="semi_transparent_black">#80000000</color>
 
     <!-- Text colors -->
     <color name="text_primary">#212121</color>

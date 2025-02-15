@@ -25,7 +25,7 @@ android {
         javaCompileOptions {
             annotationProcessorOptions {
                 arguments += [
-                    "room.schemaLocation": "$projectDir/schemas".toString(),
+                    "room.schemaLocation": "$projectDir/schemas",
                     "room.incremental": "true",
                     "room.expandProjection": "true"
                 ]
@@ -36,13 +36,6 @@ android {
     buildTypes {
         debug {
             buildConfigField "String", "API_BASE_URL", "\"https://dev-api.yourdomain.com/\""
-            manifestPlaceholders = [
-                MAPS_API_KEY: "@string/maps_api_key"
-            ]
-        }
-        staging {
-            initWith debug
-            buildConfigField "String", "API_BASE_URL", "\"https://staging-api.yourdomain.com/\""
             manifestPlaceholders = [
                 MAPS_API_KEY: "@string/maps_api_key"
             ]
@@ -87,6 +80,9 @@ android {
         correctErrorTypes true
         useBuildCache true
         arguments {
+            arg("room.schemaLocation", "$projectDir/schemas")
+            arg("room.incremental", "true")
+            arg("room.expandProjection", "true")
             arg("dagger.fastInit", "true")
             arg("dagger.formatGeneratedSource", "disabled")
         }
@@ -109,6 +105,12 @@ dependencies {
     implementation 'androidx.lifecycle:lifecycle-livedata-ktx:2.7.0'
     implementation 'androidx.activity:activity-ktx:1.8.2'
     implementation 'androidx.fragment:fragment-ktx:1.6.2'
+    
+    // Room Database
+    def room_version = "2.6.1"
+    implementation "androidx.room:room-runtime:$room_version"
+    implementation "androidx.room:room-ktx:$room_version"
+    kapt "androidx.room:room-compiler:$room_version"
     
     // WorkManager
     implementation "androidx.work:work-runtime-ktx:2.9.0"
@@ -134,11 +136,6 @@ dependencies {
     // Coroutines
     implementation 'org.jetbrains.kotlinx:kotlinx-coroutines-android:1.7.3'
     implementation 'org.jetbrains.kotlinx:kotlinx-coroutines-play-services:1.7.3'
-    
-    // Room Database
-    implementation 'androidx.room:room-runtime:2.6.1'
-    implementation 'androidx.room:room-ktx:2.6.1'
-    kapt 'androidx.room:room-compiler:2.6.1'
 
     // Timber for logging
     implementation 'com.jakewharton.timber:timber:5.0.1'

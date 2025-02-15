@@ -10,10 +10,7 @@ import com.example.advancedandroidapp.data.models.UserProfile
 import com.example.advancedandroidapp.data.models.UserSettings
 import com.example.advancedandroidapp.data.models.CachedLocation
 import com.example.advancedandroidapp.data.models.OfflineAction
-import com.example.advancedandroidapp.data.local.converters.DateConverter
-import com.example.advancedandroidapp.data.local.converters.ListConverter
-import com.example.advancedandroidapp.data.local.converters.LocationConverter
-import com.example.advancedandroidapp.data.local.converters.UserProfileConverter
+import com.example.advancedandroidapp.data.local.converters.*
 
 @Database(
     entities = [
@@ -27,10 +24,12 @@ import com.example.advancedandroidapp.data.local.converters.UserProfileConverter
     exportSchema = true
 )
 @TypeConverters(
-    DateConverter::class,
-    ListConverter::class,
-    LocationConverter::class,
-    UserProfileConverter::class
+    value = [
+        DateConverter::class,
+        ListConverter::class,
+        LocationConverter::class,
+        UserProfileConverter::class
+    ]
 )
 abstract class AppDatabase : RoomDatabase() {
     abstract fun locationDao(): LocationDao

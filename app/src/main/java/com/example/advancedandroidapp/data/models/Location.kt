@@ -1,13 +1,12 @@
 package com.example.advancedandroidapp.data.models
 
-import androidx.room.*
+import androidx.room.Entity
+import androidx.room.PrimaryKey
+import androidx.room.ColumnInfo
 import com.google.gson.annotations.SerializedName
-import com.example.advancedandroidapp.data.local.converters.DateConverter
-import com.example.advancedandroidapp.data.local.converters.ListConverter
 import java.util.Date
 
 @Entity(tableName = "locations")
-@TypeConverters(DateConverter::class, ListConverter::class)
 data class Location(
     @PrimaryKey
     @SerializedName("id")

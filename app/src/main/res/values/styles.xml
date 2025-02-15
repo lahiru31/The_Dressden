@@ -1,44 +1,46 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
-    <!-- Custom Text Input Layout Style -->
-    <style name="Widget.App.TextInputLayout" parent="Widget.MaterialComponents.TextInputLayout.OutlinedBox">
-        <item name="boxStrokeColor">@color/primary</item>
-        <item name="hintTextColor">@color/primary</item>
-        <item name="boxCornerRadiusTopStart">@dimen/radius_medium</item>
-        <item name="boxCornerRadiusTopEnd">@dimen/radius_medium</item>
-        <item name="boxCornerRadiusBottomStart">@dimen/radius_medium</item>
-        <item name="boxCornerRadiusBottomEnd">@dimen/radius_medium</item>
+    <!-- Base application theme -->
+    <style name="AppTheme" parent="Theme.MaterialComponents.Light.NoActionBar">
+        <item name="colorPrimary">@color/primary</item>
+        <item name="colorPrimaryDark">@color/primary_dark</item>
+        <item name="colorAccent">@color/accent</item>
     </style>
 
-    <!-- Custom Card Style -->
-    <style name="Widget.App.CardView" parent="Widget.MaterialComponents.CardView">
-        <item name="cardElevation">@dimen/shadow_small</item>
-        <item name="cardCornerRadius">@dimen/radius_medium</item>
-        <item name="contentPadding">@dimen/spacing_large</item>
-    </style>
-
-    <!-- Custom Bottom Sheet Style -->
-    <style name="Widget.App.BottomSheet" parent="Widget.MaterialComponents.BottomSheet">
-        <item name="behavior_peekHeight">0dp</item>
-        <item name="behavior_hideable">true</item>
-        <item name="behavior_skipCollapsed">true</item>
-        <item name="shapeAppearance">@style/ShapeAppearance.App.LargeComponent</item>
-        <item name="elevation">@dimen/shadow_large</item>
-    </style>
-
-    <!-- Shape Appearances -->
-    <style name="ShapeAppearance.App.SmallComponent" parent="ShapeAppearance.MaterialComponents.SmallComponent">
+    <!-- Circle Image View style -->
+    <style name="CircleImageView">
         <item name="cornerFamily">rounded</item>
-        <item name="cornerSize">@dimen/radius_small</item>
+        <item name="cornerSize">50%</item>
     </style>
 
-    <style name="ShapeAppearance.App.MediumComponent" parent="ShapeAppearance.MaterialComponents.MediumComponent">
-        <item name="cornerFamily">rounded</item>
-        <item name="cornerSize">@dimen/radius_medium</item>
+    <!-- Custom button styles -->
+    <style name="Button.Primary" parent="Widget.MaterialComponents.Button">
+        <item name="android:textColor">@color/white</item>
+        <item name="backgroundTint">@color/primary</item>
     </style>
 
-    <style name="ShapeAppearance.App.LargeComponent" parent="ShapeAppearance.MaterialComponents.LargeComponent">
-        <item name="cornerFamily">rounded</item>
-        <item name="cornerSize">@dimen/radius_xlarge</item>
+    <style name="Button.Secondary" parent="Widget.MaterialComponents.Button.OutlinedButton">
+        <item name="android:textColor">@color/primary</item>
+        <item name="strokeColor">@color/primary</item>
+    </style>
+
+    <!-- Text styles -->
+    <style name="TextAppearance.Heading" parent="TextAppearance.MaterialComponents.Headline5">
+        <item name="android:textColor">@color/gray_900</item>
+        <item name="android:textStyle">bold</item>
+    </style>
+
+    <style name="TextAppearance.Subheading" parent="TextAppearance.MaterialComponents.Subtitle1">
+        <item name="android:textColor">@color/gray_700</item>
+    </style>
+
+    <style name="TextAppearance.Body" parent="TextAppearance.MaterialComponents.Body1">
+        <item name="android:textColor">@color/gray_800</item>
+    </style>
+
+    <!-- Card styles -->
+    <style name="CardView.Rounded" parent="Widget.MaterialComponents.CardView">
+        <item name="cardCornerRadius">8dp</item>
+        <item name="cardElevation">2dp</item>
     </style>
 </resources>

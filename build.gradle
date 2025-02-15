@@ -23,30 +23,6 @@ buildscript {
     }
 }
 
-allprojects {
-    repositories {
-        google()
-        mavenCentral()
-    }
-}
-
-// Set JDK compatibility for all projects
-subprojects {
-    tasks.withType(JavaCompile).configureEach {
-        sourceCompatibility = JavaVersion.VERSION_17
-        targetCompatibility = JavaVersion.VERSION_17
-    }
-    tasks.withType(org.jetbrains.kotlin.gradle.tasks.KotlinCompile).configureEach {
-        kotlinOptions {
-            jvmTarget = '17'
-            freeCompilerArgs += [
-                '-opt-in=kotlin.RequiresOptIn',
-                '-Xjvm-default=all'
-            ]
-        }
-    }
-}
-
 tasks.register('clean', Delete) {
     delete rootProject.buildDir
 }

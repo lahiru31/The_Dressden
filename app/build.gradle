@@ -21,7 +21,6 @@ android {
 
         testInstrumentationRunner "androidx.test.runner.AndroidJUnitRunner"
 
-        // Enable Room schema export
         javaCompileOptions {
             annotationProcessorOptions {
                 arguments += [
@@ -75,7 +74,6 @@ android {
         ]
     }
 
-    // Enable Kapt incremental processing
     kapt {
         correctErrorTypes true
         useBuildCache true

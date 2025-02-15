@@ -7,7 +7,13 @@ import com.example.advancedandroidapp.data.local.dao.LocationDao
 import com.example.advancedandroidapp.data.local.dao.UserProfileDao
 import com.example.advancedandroidapp.data.models.Location
 import com.example.advancedandroidapp.data.models.UserProfile
+import com.example.advancedandroidapp.data.models.UserSettings
+import com.example.advancedandroidapp.data.models.CachedLocation
+import com.example.advancedandroidapp.data.models.OfflineAction
 import com.example.advancedandroidapp.data.local.converters.DateConverter
+import com.example.advancedandroidapp.data.local.converters.ListConverter
+import com.example.advancedandroidapp.data.local.converters.LocationConverter
+import com.example.advancedandroidapp.data.local.converters.UserProfileConverter
 
 @Database(
     entities = [
@@ -23,7 +29,6 @@ import com.example.advancedandroidapp.data.local.converters.DateConverter
 @TypeConverters(
     DateConverter::class,
     ListConverter::class,
-    MapConverter::class,
     LocationConverter::class,
     UserProfileConverter::class
 )

@@ -4,16 +4,16 @@
     <style name="Widget.App.TextInputLayout" parent="Widget.MaterialComponents.TextInputLayout.OutlinedBox">
         <item name="boxStrokeColor">@color/primary</item>
         <item name="hintTextColor">@color/primary</item>
-        <item name="boxCornerRadiusTopStart">@dimen/corner_medium</item>
-        <item name="boxCornerRadiusTopEnd">@dimen/corner_medium</item>
-        <item name="boxCornerRadiusBottomStart">@dimen/corner_medium</item>
-        <item name="boxCornerRadiusBottomEnd">@dimen/corner_medium</item>
+        <item name="boxCornerRadiusTopStart">@dimen/radius_medium</item>
+        <item name="boxCornerRadiusTopEnd">@dimen/radius_medium</item>
+        <item name="boxCornerRadiusBottomStart">@dimen/radius_medium</item>
+        <item name="boxCornerRadiusBottomEnd">@dimen/radius_medium</item>
     </style>
 
     <!-- Custom Card Style -->
     <style name="Widget.App.CardView" parent="Widget.MaterialComponents.CardView">
-        <item name="cardElevation">@dimen/elevation_small</item>
-        <item name="cardCornerRadius">@dimen/corner_medium</item>
+        <item name="cardElevation">@dimen/shadow_small</item>
+        <item name="cardCornerRadius">@dimen/radius_medium</item>
         <item name="contentPadding">@dimen/spacing_large</item>
     </style>
 
@@ -23,22 +23,22 @@
         <item name="behavior_hideable">true</item>
         <item name="behavior_skipCollapsed">true</item>
         <item name="shapeAppearance">@style/ShapeAppearance.App.LargeComponent</item>
-        <item name="elevation">@dimen/elevation_large</item>
+        <item name="elevation">@dimen/shadow_large</item>
     </style>
 
     <!-- Shape Appearances -->
     <style name="ShapeAppearance.App.SmallComponent" parent="ShapeAppearance.MaterialComponents.SmallComponent">
         <item name="cornerFamily">rounded</item>
-        <item name="cornerSize">@dimen/corner_small</item>
+        <item name="cornerSize">@dimen/radius_small</item>
     </style>
 
     <style name="ShapeAppearance.App.MediumComponent" parent="ShapeAppearance.MaterialComponents.MediumComponent">
         <item name="cornerFamily">rounded</item>
-        <item name="cornerSize">@dimen/corner_medium</item>
+        <item name="cornerSize">@dimen/radius_medium</item>
     </style>
 
     <style name="ShapeAppearance.App.LargeComponent" parent="ShapeAppearance.MaterialComponents.LargeComponent">
         <item name="cornerFamily">rounded</item>
-        <item name="cornerSize">@dimen/corner_xlarge</item>
+        <item name="cornerSize">@dimen/radius_xlarge</item>
     </style>
 </resources>

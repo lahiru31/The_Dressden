@@ -1,15 +1,16 @@
 pluginManagement {
     repositories {
+        gradlePluginPortal()
         google()
         mavenCentral()
-        gradlePluginPortal()
     }
-    resolutionStrategy {
-        eachPlugin {
-            if (requested.id.id == 'com.google.devtools.ksp') {
-                useModule("com.google.devtools.ksp:com.google.devtools.ksp.gradle.plugin:1.9.22-1.0.17")
-            }
-        }
+    plugins {
+        id 'com.android.application' version '8.8.0'
+        id 'org.jetbrains.kotlin.android' version '1.9.22'
+        id 'com.google.devtools.ksp' version '1.9.22-1.0.17'
+        id 'com.google.gms.google-services' version '4.4.1'
+        id 'com.google.firebase.crashlytics' version '2.9.9'
+        id 'com.google.dagger.hilt.android' version '2.50'
     }
 }
 
@@ -18,14 +19,6 @@ dependencyResolutionManagement {
     repositories {
         google()
         mavenCentral()
-        maven { url 'https://jitpack.io' }
-    }
-    versionCatalogs {
-        libs {
-            version('kotlin', '1.9.22')
-            version('agp', '8.8.0') // Updated AGP version
-            version('ksp', '1.9.22-1.0.17')
-        }
     }
 }
 

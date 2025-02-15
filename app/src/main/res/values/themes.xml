@@ -92,17 +92,17 @@
     <!-- Shape Appearances -->
     <style name="ShapeAppearance.AdvancedAndroidApp.SmallComponent" parent="ShapeAppearance.MaterialComponents.SmallComponent">
         <item name="cornerFamily">rounded</item>
-        <item name="cornerSize">@dimen/corner_small</item>
+        <item name="cornerSize">@dimen/radius_small</item>
     </style>
 
     <style name="ShapeAppearance.AdvancedAndroidApp.MediumComponent" parent="ShapeAppearance.MaterialComponents.MediumComponent">
         <item name="cornerFamily">rounded</item>
-        <item name="cornerSize">@dimen/corner_medium</item>
+        <item name="cornerSize">@dimen/radius_medium</item>
     </style>
 
     <style name="ShapeAppearance.AdvancedAndroidApp.LargeComponent" parent="ShapeAppearance.MaterialComponents.LargeComponent">
         <item name="cornerFamily">rounded</item>
-        <item name="cornerSize">@dimen/corner_large</item>
+        <item name="cornerSize">@dimen/radius_large</item>
     </style>
 
     <!-- Custom Widget Styles -->

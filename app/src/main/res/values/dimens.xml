@@ -1,15 +1,15 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
     <!-- Corner Radii -->
-    <dimen name="corner_small">@dimen/card_corner_radius</dimen>
-    <dimen name="corner_medium">@dimen/card_corner_radius</dimen>
-    <dimen name="corner_large">@dimen/bottom_sheet_corner_radius</dimen>
-    <dimen name="corner_xlarge">@dimen/bottom_sheet_corner_radius</dimen>
+    <dimen name="radius_small">@dimen/card_corner_radius</dimen>
+    <dimen name="radius_medium">@dimen/card_corner_radius</dimen>
+    <dimen name="radius_large">@dimen/bottom_sheet_corner_radius</dimen>
+    <dimen name="radius_xlarge">@dimen/bottom_sheet_corner_radius</dimen>
 
     <!-- Elevations -->
-    <dimen name="elevation_small">@dimen/card_elevation</dimen>
-    <dimen name="elevation_medium">4dp</dimen>
-    <dimen name="elevation_large">8dp</dimen>
+    <dimen name="shadow_small">@dimen/card_elevation</dimen>
+    <dimen name="shadow_medium">4dp</dimen>
+    <dimen name="shadow_large">8dp</dimen>
 
     <!-- Component Sizes -->
     <dimen name="button_height">@dimen/progress_button_height</dimen>

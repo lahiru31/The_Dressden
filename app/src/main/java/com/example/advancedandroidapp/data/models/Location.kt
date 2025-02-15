@@ -3,6 +3,9 @@ package com.example.advancedandroidapp.data.models
 import androidx.room.Entity
 import androidx.room.PrimaryKey
 import androidx.room.ColumnInfo
+import androidx.room.TypeConverters
+import com.example.advancedandroidapp.data.local.converters.DateConverter
+import com.example.advancedandroidapp.data.local.converters.ListConverter
 import com.google.gson.annotations.SerializedName
 import java.util.Date
 
@@ -31,9 +34,11 @@ data class Location(
     val category: String,
 
     @SerializedName("rating")
+    @ColumnInfo(name = "rating")
     val rating: Float?,
 
     @SerializedName("photos")
+    @TypeConverters(ListConverter::class)
     val photos: List<String>?,
 
     @SerializedName("created_by")
@@ -42,9 +47,11 @@ data class Location(
 
     @SerializedName("created_at")
     @ColumnInfo(name = "created_at")
+    @TypeConverters(DateConverter::class)
     val createdAt: Date,
 
     @SerializedName("updated_at")
     @ColumnInfo(name = "updated_at")
+    @TypeConverters(DateConverter::class)
     val updatedAt: Date
 )

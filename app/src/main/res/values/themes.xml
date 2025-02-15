@@ -22,38 +22,71 @@
         <!-- Text appearances -->
         <item name="textAppearanceHeadline1">@style/TextAppearance.AdvancedAndroidApp.Headline1</item>
         <item name="textAppearanceHeadline2">@style/TextAppearance.AdvancedAndroidApp.Headline2</item>
+        <item name="textAppearanceHeadline5">@style/TextAppearance.AdvancedAndroidApp.Headline5</item>
+        <item name="textAppearanceHeadline6">@style/TextAppearance.AdvancedAndroidApp.Headline6</item>
+        <item name="textAppearanceSubtitle1">@style/TextAppearance.AdvancedAndroidApp.Subtitle1</item>
         <item name="textAppearanceBody1">@style/TextAppearance.AdvancedAndroidApp.Body1</item>
         <item name="textAppearanceBody2">@style/TextAppearance.AdvancedAndroidApp.Body2</item>
+        <item name="textAppearanceCaption">@style/TextAppearance.AdvancedAndroidApp.Caption</item>
         
         <!-- Shape appearances -->
         <item name="shapeAppearanceSmallComponent">@style/ShapeAppearance.AdvancedAndroidApp.SmallComponent</item>
         <item name="shapeAppearanceMediumComponent">@style/ShapeAppearance.AdvancedAndroidApp.MediumComponent</item>
         <item name="shapeAppearanceLargeComponent">@style/ShapeAppearance.AdvancedAndroidApp.LargeComponent</item>
+        
+        <!-- Custom attributes -->
+        <item name="dividerColor">@color/gray_300</item>
+        <item name="colorControlHighlight">@color/gray_400</item>
+        <item name="colorOnSurface">@color/text_primary</item>
     </style>
 
     <!-- Text Appearances -->
     <style name="TextAppearance.AdvancedAndroidApp.Headline1" parent="TextAppearance.MaterialComponents.Headline1">
         <item name="android:textSize">24sp</item>
         <item name="android:textColor">?attr/colorOnBackground</item>
-        <item name="android:fontFamily">@font/roboto_medium</item>
+        <item name="android:fontFamily">sans-serif-medium</item>
     </style>
 
     <style name="TextAppearance.AdvancedAndroidApp.Headline2" parent="TextAppearance.MaterialComponents.Headline2">
         <item name="android:textSize">20sp</item>
         <item name="android:textColor">?attr/colorOnBackground</item>
-        <item name="android:fontFamily">@font/roboto_medium</item>
+        <item name="android:fontFamily">sans-serif-medium</item>
     </style>
 
     <style name="TextAppearance.AdvancedAndroidApp.Body1" parent="TextAppearance.MaterialComponents.Body1">
         <item name="android:textSize">16sp</item>
         <item name="android:textColor">?attr/colorOnBackground</item>
-        <item name="android:fontFamily">@font/roboto_regular</item>
+        <item name="android:fontFamily">sans-serif</item>
     </style>
 
     <style name="TextAppearance.AdvancedAndroidApp.Body2" parent="TextAppearance.MaterialComponents.Body2">
         <item name="android:textSize">14sp</item>
         <item name="android:textColor">?attr/colorOnBackground</item>
-        <item name="android:fontFamily">@font/roboto_regular</item>
+        <item name="android:fontFamily">sans-serif</item>
+    </style>
+
+    <style name="TextAppearance.AdvancedAndroidApp.Headline5" parent="TextAppearance.MaterialComponents.Headline5">
+        <item name="android:textSize">20sp</item>
+        <item name="android:textColor">?attr/colorOnBackground</item>
+        <item name="android:fontFamily">sans-serif-medium</item>
+    </style>
+
+    <style name="TextAppearance.AdvancedAndroidApp.Headline6" parent="TextAppearance.MaterialComponents.Headline6">
+        <item name="android:textSize">18sp</item>
+        <item name="android:textColor">?attr/colorOnBackground</item>
+        <item name="android:fontFamily">sans-serif-medium</item>
+    </style>
+
+    <style name="TextAppearance.AdvancedAndroidApp.Caption" parent="TextAppearance.MaterialComponents.Caption">
+        <item name="android:textSize">12sp</item>
+        <item name="android:textColor">?attr/colorOnBackground</item>
+        <item name="android:fontFamily">sans-serif</item>
+    </style>
+
+    <style name="TextAppearance.AdvancedAndroidApp.Subtitle1" parent="TextAppearance.MaterialComponents.Subtitle1">
+        <item name="android:textSize">16sp</item>
+        <item name="android:textColor">?attr/colorOnBackground</item>
+        <item name="android:fontFamily">sans-serif-medium</item>
     </style>
 
     <!-- Shape Appearances -->

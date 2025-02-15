@@ -1,92 +1,74 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
-    <!-- App Name -->
-    <string name="app_name">Advanced Android App</string>
-
-    <!-- Navigation Labels -->
-    <string name="home">Home</string>
-    <string name="map">Map</string>
-    <string name="profile">Profile</string>
-    <string name="settings">Settings</string>
-    <string name="auth">Authentication</string>
-    <string name="location_detail">Location Details</string>
-
-    <!-- Button Labels -->
-    <string name="sign_in">Sign In</string>
-    <string name="sign_up">Sign Up</string>
-    <string name="sign_out">Sign Out</string>
-    <string name="add_new_item">Add New Item</string>
-    <string name="save">Save</string>
-    <string name="cancel">Cancel</string>
-    <string name="retry">Retry</string>
-    <string name="directions">Directions</string>
-    <string name="view_details">View Details</string>
-    <string name="forgot_password">Forgot Password?</string>
-    <string name="or">or</string>
-    <string name="continue_with_google">Continue with Google</string>
-
-    <!-- Form Labels -->
-    <string name="email">Email</string>
-    <string name="password">Password</string>
-    <string name="confirm_password">Confirm Password</string>
-    <string name="username">Username</string>
-
-    <!-- Error Messages -->
-    <string name="error_invalid_email">Invalid email address</string>
-    <string name="error_invalid_password">Password must be at least 6 characters</string>
-    <string name="error_passwords_dont_match">Passwords do not match</string>
-    <string name="error_field_required">This field is required</string>
-    <string name="error_network">Network error. Please check your connection.</string>
-    <string name="error_unknown">An unknown error occurred</string>
-
-    <!-- Success Messages -->
-    <string name="success_sign_in">Successfully signed in</string>
-    <string name="success_sign_up">Account created successfully</string>
-    <string name="success_sign_out">Successfully signed out</string>
-    <string name="success_save">Changes saved successfully</string>
-
-    <!-- Notification Channel -->
-    <string name="channel_name">Default Channel</string>
-    <string name="channel_description">Default notification channel for general notifications</string>
-
-    <!-- Permissions -->
-    <string name="permission_location_rationale">Location permission is needed to show your position on the map</string>
-    <string name="permission_camera_rationale">Camera permission is needed to take photos</string>
-    <string name="permission_storage_rationale">Storage permission is needed to save files</string>
-
-    <!-- Map Related -->
-    <string name="location_permission_needed">Location permission is needed to show your location</string>
-    <string name="enable_location_services">Please enable location services</string>
-    <string name="current_location">Current Location</string>
-    <string name="search_location">Search Location</string>
+    <string name="app_name">The Dressden</string>
+    
+    <!-- Home Fragment -->
     <string name="explore">Explore</string>
     <string name="nearby_locations">Nearby Locations</string>
     <string name="no_locations_found">No locations found</string>
     <string name="add_new_location">Add New Location</string>
+    <string name="offline_mode">You are currently offline</string>
+    <string name="profile">Profile</string>
+    
+    <!-- Map Fragment -->
+    <string name="search_location">Search for a location</string>
     <string name="restaurants">Restaurants</string>
     <string name="hotels">Hotels</string>
     <string name="attractions">Attractions</string>
     <string name="shopping">Shopping</string>
-    <string name="location_image">Location Image</string>
-
-    <!-- Profile -->
+    
+    <!-- Profile Fragment -->
     <string name="personal_info">Personal Information</string>
     <string name="full_name">Full Name</string>
     <string name="bio">Bio</string>
     <string name="contact_info">Contact Information</string>
+    <string name="email">Email Address</string>
     <string name="phone">Phone</string>
     <string name="my_locations">My Locations</string>
+    <string name="settings">Settings</string>
+    <string name="sign_out">Sign Out</string>
     <string name="edit_profile">Edit Profile</string>
+    <string name="save">Save</string>
+    
+    <!-- Location Item -->
+    <string name="location_image">Location Image</string>
+    <string name="share">Share</string>
+    <string name="favorite">Favorite</string>
+    
+    <!-- Location Details -->
+    <string name="directions">Get Directions</string>
+    <string name="view_details">View Details</string>
 
-    <!-- Settings -->
-    <string name="notifications_enabled">Enable Notifications</string>
-    <string name="dark_mode">Dark Mode</string>
-    <string name="language">Language</string>
-    <string name="about">About</string>
-    <string name="version">Version</string>
-
-    <!-- Misc -->
+    <!-- Loading States -->
     <string name="loading">Loading…</string>
-    <string name="no_data">No data available</string>
-    <string name="offline_mode">Offline Mode</string>
+    <string name="please_wait">Please wait…</string>
+    <string name="loading_error">An error occurred. Please try again.</string>
+    <string name="loading_no_network">No internet connection</string>
+
+    <!-- Button States -->
+    <string name="button_loading">Processing…</string>
+    <string name="button_error">Error</string>
+    <string name="button_success">Success</string>
+    <string name="button_cancel">Cancel</string>
+    <string name="button_save">Save</string>
+
+    <!-- Navigation -->
+    <string name="add_new_item">Add new item</string>
+    <string name="home">Home</string>
+    <string name="auth">Authentication</string>
+    <string name="map">Map</string>
+    <string name="profile">Profile</string>
+    <string name="settings">Settings</string>
+
+    <!-- Authentication -->
+    <string name="welcome_back">Welcome Back!</string>
+    <string name="password">Password</string>
+    <string name="confirm_password">Confirm Password</string>
+    <string name="sign_in">Sign In</string>
+    <string name="sign_up">Sign Up</string>
+    <string name="forgot_password">Forgot Password?</string>
+    <string name="or">OR</string>
+    <string name="continue_with_google">Continue with Google</string>
+    <string name="need_account">Need an account? Sign up</string>
+    <string name="have_account">Already have an account? Sign in</string>
 </resources>

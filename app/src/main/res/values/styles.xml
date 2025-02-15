@@ -1,30 +1,59 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
     <!-- Circle Image View Style -->
-    <style name="CircleImageView" parent="">
+    <style name="Widget.App.CircularImageView" parent="">
         <item name="cornerFamily">rounded</item>
         <item name="cornerSize">50%</item>
+        <item name="borderWidth">@dimen/spacing_small</item>
+        <item name="borderColor">?attr/colorPrimary</item>
     </style>
 
     <!-- Custom Button Styles -->
     <style name="Widget.App.Button" parent="Widget.MaterialComponents.Button">
         <item name="android:textAllCaps">false</item>
-        <item name="android:paddingStart">16dp</item>
-        <item name="android:paddingEnd">16dp</item>
-        <item name="android:minHeight">56dp</item>
+        <item name="android:paddingStart">@dimen/spacing_large</item>
+        <item name="android:paddingEnd">@dimen/spacing_large</item>
+        <item name="android:minHeight">@dimen/button_height</item>
     </style>
 
     <style name="Widget.App.Button.OutlinedButton" parent="Widget.MaterialComponents.Button.OutlinedButton">
         <item name="android:textAllCaps">false</item>
-        <item name="android:paddingStart">16dp</item>
-        <item name="android:paddingEnd">16dp</item>
-        <item name="android:minHeight">56dp</item>
+        <item name="android:paddingStart">@dimen/spacing_large</item>
+        <item name="android:paddingEnd">@dimen/spacing_large</item>
+        <item name="android:minHeight">@dimen/button_height</item>
+    </style>
+
+    <!-- Loading View Style -->
+    <style name="Widget.App.LoadingView" parent="">
+        <item name="loadingMessage">@string/please_wait</item>
+        <item name="showProgress">true</item>
+    </style>
+
+    <!-- Rating View Style -->
+    <style name="Widget.App.RatingView" parent="">
+        <item name="starSize">@dimen/icon_size</item>
+        <item name="starPadding">@dimen/spacing_small</item>
+        <item name="starColor">?attr/colorPrimary</item>
+        <item name="starBackgroundColor">@color/gray_300</item>
+        <item name="maxRating">5</item>
+    </style>
+
+    <!-- Progress Button Style -->
+    <style name="Widget.App.ProgressButton" parent="">
+        <item name="buttonTextColor">?attr/colorOnPrimary</item>
+        <item name="buttonBackgroundColor">?attr/colorPrimary</item>
+        <item name="progressColor">?attr/colorOnPrimary</item>
+        <item name="loadingText">@string/button_loading</item>
     </style>
 
     <!-- Custom Text Input Layout Style -->
     <style name="Widget.App.TextInputLayout" parent="Widget.MaterialComponents.TextInputLayout.OutlinedBox">
         <item name="boxStrokeColor">@color/primary</item>
         <item name="hintTextColor">@color/primary</item>
+        <item name="boxCornerRadiusTopStart">@dimen/corner_medium</item>
+        <item name="boxCornerRadiusTopEnd">@dimen/corner_medium</item>
+        <item name="boxCornerRadiusBottomStart">@dimen/corner_medium</item>
+        <item name="boxCornerRadiusBottomEnd">@dimen/corner_medium</item>
     </style>
 
     <!-- Custom Chip Style -->
@@ -32,14 +61,16 @@
         <item name="chipBackgroundColor">@color/chip_background_color</item>
         <item name="android:textColor">@color/chip_text_color</item>
         <item name="chipStrokeColor">@color/chip_stroke_color</item>
-        <item name="chipStrokeWidth">1dp</item>
+        <item name="chipStrokeWidth">@dimen/spacing_small</item>
+        <item name="chipMinHeight">@dimen/button_height</item>
+        <item name="android:textSize">@dimen/text_body</item>
     </style>
 
     <!-- Custom Card Style -->
     <style name="Widget.App.CardView" parent="Widget.MaterialComponents.CardView">
-        <item name="cardElevation">2dp</item>
-        <item name="cardCornerRadius">8dp</item>
-        <item name="contentPadding">16dp</item>
+        <item name="cardElevation">@dimen/elevation_small</item>
+        <item name="cardCornerRadius">@dimen/corner_medium</item>
+        <item name="contentPadding">@dimen/spacing_large</item>
     </style>
 
     <!-- Custom Bottom Sheet Style -->
@@ -48,21 +79,22 @@
         <item name="behavior_hideable">true</item>
         <item name="behavior_skipCollapsed">true</item>
         <item name="shapeAppearance">@style/ShapeAppearance.App.LargeComponent</item>
+        <item name="elevation">@dimen/elevation_large</item>
     </style>
 
     <!-- Shape Appearances -->
     <style name="ShapeAppearance.App.SmallComponent" parent="ShapeAppearance.MaterialComponents.SmallComponent">
         <item name="cornerFamily">rounded</item>
-        <item name="cornerSize">4dp</item>
+        <item name="cornerSize">@dimen/corner_small</item>
     </style>
 
     <style name="ShapeAppearance.App.MediumComponent" parent="ShapeAppearance.MaterialComponents.MediumComponent">
         <item name="cornerFamily">rounded</item>
-        <item name="cornerSize">8dp</item>
+        <item name="cornerSize">@dimen/corner_medium</item>
     </style>
 
     <style name="ShapeAppearance.App.LargeComponent" parent="ShapeAppearance.MaterialComponents.LargeComponent">
         <item name="cornerFamily">rounded</item>
-        <item name="cornerSize">16dp</item>
+        <item name="cornerSize">@dimen/corner_xlarge</item>
     </style>
 </resources>

@@ -7,7 +7,7 @@ import kotlinx.coroutines.flow.Flow
 @Dao
 interface CachedLocationDao {
     @Query("SELECT * FROM cached_locations ORDER BY timestamp DESC")
-    fun getAllCachedLocations(): Flow<List<CachedLocation>>
+    suspend fun getAllCachedLocations(): List<CachedLocation>
 
     @Query("SELECT * FROM cached_locations WHERE id = :id")
     suspend fun getCachedLocationById(id: String): CachedLocation?

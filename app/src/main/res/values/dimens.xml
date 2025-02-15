@@ -11,11 +11,6 @@
     <dimen name="elevation_medium">4dp</dimen>
     <dimen name="elevation_large">8dp</dimen>
 
-    <!-- Spacings -->
-    <dimen name="spacing_small">8dp</dimen>
-    <dimen name="spacing_medium">16dp</dimen>
-    <dimen name="spacing_large">24dp</dimen>
-
     <!-- Component Sizes -->
     <dimen name="button_height">56dp</dimen>
 </resources>

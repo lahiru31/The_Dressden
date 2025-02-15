@@ -19,11 +19,6 @@
     <color name="background">#FFFFFF</color>
     <color name="surface">#FFFFFF</color>
     
-    <!-- Chip colors -->
-    <color name="chip_background_color">#F5F5F5</color>
-    <color name="chip_text_color">@color/text_primary</color>
-    <color name="chip_stroke_color">@color/primary</color>
-    
     <!-- Gray colors -->
     <color name="gray_300">#E0E0E0</color>
     <color name="gray_400">#BDBDBD</color>

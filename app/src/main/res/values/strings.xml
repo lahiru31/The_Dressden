@@ -37,19 +37,6 @@
     <string name="directions">Get Directions</string>
     <string name="view_details">View Details</string>
 
-    <!-- Loading States -->
-    <string name="loading">Loading…</string>
-    <string name="please_wait">Please wait…</string>
-    <string name="loading_error">An error occurred. Please try again.</string>
-    <string name="loading_no_network">No internet connection</string>
-
-    <!-- Button States -->
-    <string name="button_loading">Processing…</string>
-    <string name="button_error">Error</string>
-    <string name="button_success">Success</string>
-    <string name="button_cancel">Cancel</string>
-    <string name="button_save">Save</string>
-
     <!-- Navigation -->
     <string name="add_new_item">Add new item</string>
     <string name="home">Home</string>

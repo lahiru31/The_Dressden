@@ -28,13 +28,8 @@ object DatabaseModule {
     }
 
     @Provides
-    fun provideCachedLocationDao(database: AppDatabase): CachedLocationDao {
-        return database.cachedLocationDao()
-    }
-
-    @Provides
-    fun provideLocationDao(database: AppDatabase): LocationDao {
-        return database.locationDao()
+    fun provideUserDao(database: AppDatabase): UserDao {
+        return database.userDao()
     }
 
     @Provides
@@ -45,6 +40,26 @@ object DatabaseModule {
     @Provides
     fun provideUserSettingsDao(database: AppDatabase): UserSettingsDao {
         return database.userSettingsDao()
+    }
+
+    @Provides
+    fun provideLocationDao(database: AppDatabase): LocationDao {
+        return database.locationDao()
+    }
+
+    @Provides
+    fun provideLocationTagDao(database: AppDatabase): LocationTagDao {
+        return database.locationTagDao()
+    }
+
+    @Provides
+    fun provideLocationReviewDao(database: AppDatabase): LocationReviewDao {
+        return database.locationReviewDao()
+    }
+
+    @Provides
+    fun provideCachedLocationDao(database: AppDatabase): CachedLocationDao {
+        return database.cachedLocationDao()
     }
 
     @Provides

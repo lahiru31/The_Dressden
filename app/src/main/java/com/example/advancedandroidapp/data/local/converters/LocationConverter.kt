@@ -1,23 +1,19 @@
 package com.example.advancedandroidapp.data.local.converters
 
-import androidx.room.ProvidedTypeConverter
 import androidx.room.TypeConverter
-import com.google.gson.Gson
 import com.example.advancedandroidapp.data.models.Location
+import com.google.gson.Gson
 
-@ProvidedTypeConverter
 class LocationConverter {
     private val gson = Gson()
 
     @TypeConverter
-    fun fromString(value: String?): Location? {
-        if (value == null) return null
-        return gson.fromJson(value, Location::class.java)
+    fun fromLocation(location: Location?): String? {
+        return location?.let { gson.toJson(it) }
     }
 
     @TypeConverter
-    fun fromLocation(location: Location?): String? {
-        if (location == null) return null
-        return gson.toJson(location)
+    fun toLocation(value: String?): Location? {
+        return value?.let { gson.fromJson(it, Location::class.java) }
     }
 }

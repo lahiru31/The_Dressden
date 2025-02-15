@@ -1,23 +1,19 @@
 package com.example.advancedandroidapp.data.local.converters
 
-import androidx.room.ProvidedTypeConverter
 import androidx.room.TypeConverter
-import com.google.gson.Gson
 import com.example.advancedandroidapp.data.models.UserProfile
+import com.google.gson.Gson
 
-@ProvidedTypeConverter
 class UserProfileConverter {
     private val gson = Gson()
 
     @TypeConverter
-    fun fromString(value: String?): UserProfile? {
-        if (value == null) return null
-        return gson.fromJson(value, UserProfile::class.java)
+    fun fromUserProfile(userProfile: UserProfile?): String? {
+        return userProfile?.let { gson.toJson(it) }
     }
 
     @TypeConverter
-    fun fromUserProfile(profile: UserProfile?): String? {
-        if (profile == null) return null
-        return gson.toJson(profile)
+    fun toUserProfile(value: String?): UserProfile? {
+        return value?.let { gson.fromJson(it, UserProfile::class.java) }
     }
 }

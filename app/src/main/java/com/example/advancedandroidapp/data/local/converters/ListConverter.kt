@@ -1,11 +1,9 @@
 package com.example.advancedandroidapp.data.local.converters
 
-import androidx.room.ProvidedTypeConverter
 import androidx.room.TypeConverter
 import com.google.gson.Gson
 import com.google.gson.reflect.TypeToken
 
-@ProvidedTypeConverter
 class ListConverter {
     private val gson = Gson()
 
@@ -18,7 +16,6 @@ class ListConverter {
 
     @TypeConverter
     fun fromList(list: List<String>?): String? {
-        if (list == null) return null
-        return gson.toJson(list)
+        return list?.let { gson.toJson(it) }
     }
 }

@@ -21,18 +21,23 @@ data class User(
 data class UserProfile(
     @PrimaryKey
     @SerializedName("user_id")
+    @ColumnInfo(name = "user_id")
     val userId: String,
     @SerializedName("username")
     val username: String,
     @SerializedName("full_name")
+    @ColumnInfo(name = "full_name")
     val fullName: String,
     @SerializedName("avatar_url")
+    @ColumnInfo(name = "avatar_url")
     val avatarUrl: String?,
     @SerializedName("bio")
     val bio: String?,
     @SerializedName("phone_number")
+    @ColumnInfo(name = "phone_number")
     val phoneNumber: String?,
     @SerializedName("updated_at")
+    @ColumnInfo(name = "updated_at")
     val updatedAt: Date
 )
 
@@ -57,12 +62,16 @@ data class Location(
     @SerializedName("rating")
     val rating: Float?,
     @SerializedName("photos")
+    @TypeConverters(ListConverter::class)
     val photos: List<String>?,
     @SerializedName("created_by")
+    @ColumnInfo(name = "created_by")
     val createdBy: String,
     @SerializedName("created_at")
+    @ColumnInfo(name = "created_at")
     val createdAt: Date,
     @SerializedName("updated_at")
+    @ColumnInfo(name = "updated_at")
     val updatedAt: Date
 )
 

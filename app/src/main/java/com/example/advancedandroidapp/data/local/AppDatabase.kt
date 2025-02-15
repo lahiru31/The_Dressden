@@ -12,12 +12,21 @@ import com.example.advancedandroidapp.data.local.converters.DateConverter
 @Database(
     entities = [
         Location::class,
-        UserProfile::class
+        UserProfile::class,
+        UserSettings::class,
+        CachedLocation::class,
+        OfflineAction::class
     ],
-    version = 1,
+    version = 2,
     exportSchema = true
 )
-@TypeConverters(DateConverter::class)
+@TypeConverters(
+    DateConverter::class,
+    ListConverter::class,
+    MapConverter::class,
+    LocationConverter::class,
+    UserProfileConverter::class
+)
 abstract class AppDatabase : RoomDatabase() {
     abstract fun locationDao(): LocationDao
     abstract fun userProfileDao(): UserProfileDao

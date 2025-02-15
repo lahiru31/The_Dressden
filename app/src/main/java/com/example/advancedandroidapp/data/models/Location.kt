@@ -16,7 +16,10 @@ data class Location(
     val category: String,
     val imageUrl: String?,
     val rating: Float = 0f,
+    @ColumnInfo(name = "created_by")
     val createdBy: String,
+    @ColumnInfo(name = "created_at")
     val createdAt: Date = Date(),
+    @ColumnInfo(name = "updated_at")
     val updatedAt: Date = Date()
 )

@@ -5,12 +5,20 @@ import com.example.advancedandroidapp.data.api.ApiService
 import com.example.advancedandroidapp.data.local.AppDatabase
 import com.example.advancedandroidapp.data.models.*
 import com.example.advancedandroidapp.utils.NetworkUtils
+import com.example.advancedandroidapp.utils.PreferencesManager
+import com.google.gson.Gson
 import kotlinx.coroutines.Dispatchers
+import kotlinx.coroutines.delay
 import kotlinx.coroutines.flow.*
 import kotlinx.coroutines.withContext
 import okhttp3.MultipartBody
 import okhttp3.RequestBody
+import okhttp3.ResponseBody
+import timber.log.Timber
 import java.io.File
+import java.io.IOException
+import java.util.UUID
+import java.util.concurrent.TimeUnit
 import javax.inject.Inject
 import javax.inject.Singleton
 
@@ -19,10 +27,10 @@ class MainRepository @Inject constructor(
     private val context: Context,
     private val apiService: ApiService,
     private val appDatabase: AppDatabase,
-    private val networkUtils: NetworkUtils
+    private val networkUtils: NetworkUtils,
+    private val preferencesManager: PreferencesManager
 ) {
     // User Profile Operations
-    // Ensure login process is functioning correctly
     suspend fun login(email: String, password: String): ApiResponse<User> = withContext(Dispatchers.IO) {
         try {
             if (!networkUtils.isNetworkAvailable()) {
@@ -42,7 +50,7 @@ class MainRepository @Inject constructor(
                     response.isSuccessful && response.body() != null -> {
                         val user = response.body()!!
                         // Cache user data
-                        appDatabase.userDao().insertUser(user)
+                        appDatabase.userProfileDao().insertUserProfile(user.toUserProfile())
                         ApiResponse.Success(user)
                     }
                     response.code() == 401 -> {
@@ -83,7 +91,7 @@ class MainRepository @Inject constructor(
                     appDatabase.userProfileDao().insertUserProfile(response.body()!!)
                 }
             } catch (e: Exception) {
-                // Handle error
+                Timber.e(e, "Failed to fetch user profile")
             }
         }
     }.flowOn(Dispatchers.IO)
@@ -102,7 +110,7 @@ class MainRepository @Inject constructor(
                     appDatabase.locationDao().insertLocations(response.body()!!)
                 }
             } catch (e: Exception) {
-                // Handle error
+                Timber.e(e, "Failed to fetch locations")
             }
         }
     }.flowOn(Dispatchers.IO)
@@ -111,14 +119,24 @@ class MainRepository @Inject constructor(
         return try {
             if (!networkUtils.isNetworkAvailable()) {
                 // Store offline action
-                appDatabase.offlineActionDao().insertOfflineAction(
-                    OfflineAction(
-                        type = "CREATE",
-                        entityType = "Location",
-                        entityId = location.id,
-                        data = location.toString()
-                    )
+                val offlineAction = OfflineAction(
+                    id = UUID.randomUUID().toString(),
+                    type = "CREATE_LOCATION",
+                    data = Gson().toJson(location),
+                    timestamp = System.currentTimeMillis()
                 )
+                appDatabase.offlineActionDao().insertOfflineAction(offlineAction)
+                
+                // Cache the location
+                val cachedLocation = CachedLocation(
+                    id = location.id,
+                    latitude = location.latitude,
+                    longitude = location.longitude,
+                    address = location.address,
+                    timestamp = System.currentTimeMillis()
+                )
+                appDatabase.cachedLocationDao().insertCachedLocation(cachedLocation)
+                
                 ApiResponse.Success(location)
             } else {
                 val response = apiService.createLocation("Bearer ${getCurrentUserToken()}", location)
@@ -130,43 +148,8 @@ class MainRepository @Inject constructor(
                 }
             }
         } catch (e: Exception) {
+            Timber.e(e, "Failed to create location")
             ApiResponse.Error(-1, e.message ?: "Unknown error occurred")
-        }
-    }
-
-    // Media Operations
-    suspend fun uploadMedia(file: File, type: String): ApiResponse<MediaUploadResponse> {
-        return withContext(Dispatchers.IO) {
-            try {
-                val requestFile = RequestBody.create(
-                    okhttp3.MediaType.parse("multipart/form-data"),
-                    file
-                )
-                val body = MultipartBody.Part.createFormData("file", file.name, requestFile)
-                val typeBody = RequestBody.create(
-                    okhttp3.MediaType.parse("text/plain"),
-                    type
-                )
-
-                val response = apiService.uploadMedia(
-                    "Bearer ${getCurrentUserToken()}",
-                    body,
-                    typeBody
-                )
-
-                if (response.isSuccessful && response.body() != null) {
-                    ApiResponse.Success(MediaUploadResponse(
-                        url = response.body()!!["url"]!!,
-                        type = type,
-                        size = file.length(),
-                        uploadedAt = java.util.Date()
-                    ))
-                } else {
-                    ApiResponse.Error(response.code(), response.message())
-                }
-            } catch (e: Exception) {
-                ApiResponse.Error(-1, e.message ?: "Unknown error occurred")
-            }
         }
     }
 
@@ -183,17 +166,15 @@ class MainRepository @Inject constructor(
                     // Update cache
                     val settings = UserSettings(
                         userId = userId,
-                        notificationsEnabled = response.body()!!["notifications_enabled"] as Boolean,
-                        darkModeEnabled = response.body()!!["dark_mode_enabled"] as Boolean,
-                        language = response.body()!!["language"] as String,
-                        locationTrackingEnabled = response.body()!!["location_tracking_enabled"] as Boolean,
-                        dataBackupEnabled = response.body()!!["data_backup_enabled"] as Boolean,
-                        lastSyncTimestamp = System.currentTimeMillis()
+                        theme = response.body()!!["theme"] as String? ?: "system",
+                        notificationsEnabled = response.body()!!["notifications_enabled"] as Boolean? ?: true,
+                        locationTrackingEnabled = response.body()!!["location_tracking_enabled"] as Boolean? ?: false,
+                        lastUpdated = System.currentTimeMillis()
                     )
                     appDatabase.userSettingsDao().insertUserSettings(settings)
                 }
             } catch (e: Exception) {
-                // Handle error
+                Timber.e(e, "Failed to fetch user settings")
             }
         }
     }.flowOn(Dispatchers.IO)
@@ -242,6 +223,9 @@ class MainRepository @Inject constructor(
         appDatabase.apply {
             locationDao().deleteLocationsOlderThan(thirtyDaysAgo)
             userProfileDao().deleteProfilesOlderThan(thirtyDaysAgo)
+            cachedLocationDao().deleteOldCachedLocations(thirtyDaysAgo)
         }
     }
 }
+
+class AuthenticationException(message: String) : Exception(message)

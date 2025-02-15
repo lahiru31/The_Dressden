@@ -1,17 +1,16 @@
 package com.example.advancedandroidapp.data.models
 
-import androidx.room.*
-import com.example.advancedandroidapp.data.local.converters.DateConverter
-import com.example.advancedandroidapp.data.local.converters.LocationConverter
-import java.util.Date
+import androidx.room.Entity
+import androidx.room.PrimaryKey
 
 @Entity(tableName = "cached_locations")
-@TypeConverters(DateConverter::class, LocationConverter::class)
 data class CachedLocation(
     @PrimaryKey
     val id: String,
     
-    val location: Location,
-    
-    val lastUpdated: Date
+    val latitude: Double,
+    val longitude: Double,
+    val address: String?,
+    val timestamp: Long = System.currentTimeMillis(),
+    val syncStatus: String = "pending"
 )

@@ -1,19 +1,16 @@
 package com.example.advancedandroidapp.data.models
 
-import androidx.room.*
-import com.example.advancedandroidapp.data.local.converters.DateConverter
-import java.util.Date
+import androidx.room.Entity
+import androidx.room.PrimaryKey
 
 @Entity(tableName = "offline_actions")
-@TypeConverters(DateConverter::class)
 data class OfflineAction(
-    @PrimaryKey(autoGenerate = true)
-    val id: Long = 0,
+    @PrimaryKey
+    val id: String,
     
-    val type: String, // CREATE, UPDATE, DELETE
-    val entityType: String, // Location, UserProfile, etc.
-    val entityId: String,
-    val data: String, // JSON serialized data
-    val timestamp: Date,
-    val synced: Boolean = false
+    val type: String,
+    val data: String,
+    val timestamp: Long = System.currentTimeMillis(),
+    val status: String = "pending",
+    val retryCount: Int = 0
 )

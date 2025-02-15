@@ -8,10 +8,8 @@ data class UserSettings(
     @PrimaryKey
     val userId: String,
     
+    val theme: String = "system",
     val notificationsEnabled: Boolean = true,
-    val darkModeEnabled: Boolean = false,
-    val language: String = "en",
-    val locationTrackingEnabled: Boolean = true,
-    val dataBackupEnabled: Boolean = true,
-    val lastSyncTimestamp: Long? = null
+    val locationTrackingEnabled: Boolean = false,
+    val lastUpdated: Long = System.currentTimeMillis()
 )

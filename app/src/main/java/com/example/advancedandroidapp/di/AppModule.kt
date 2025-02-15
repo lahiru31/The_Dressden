@@ -29,9 +29,11 @@ object AppModule {
         return Room.databaseBuilder(
             context,
             AppDatabase::class.java,
-            "advanced_android_app.db"
+            AppDatabase.DATABASE_NAME
         )
-        .fallbackToDestructiveMigration()
+        .addMigrations(AppDatabase.MIGRATION_1_2)
+        .enableMultiInstanceInvalidation()
+        .fallbackToDestructiveMigration() // Only as last resort if migration fails
         .build()
     }
 

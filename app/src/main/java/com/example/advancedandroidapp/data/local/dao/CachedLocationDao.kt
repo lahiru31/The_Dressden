@@ -6,7 +6,7 @@ import kotlinx.coroutines.flow.Flow
 
 @Dao
 interface CachedLocationDao {
-    @Query("SELECT * FROM cached_locations ORDER BY lastUpdated DESC")
+    @Query("SELECT * FROM cached_locations ORDER BY timestamp DESC")
     fun getAllCachedLocations(): Flow<List<CachedLocation>>
 
     @Query("SELECT * FROM cached_locations WHERE id = :id")
@@ -24,8 +24,8 @@ interface CachedLocationDao {
     @Delete
     suspend fun deleteCachedLocation(location: CachedLocation)
 
-    @Query("DELETE FROM cached_locations WHERE lastUpdated < :timestamp")
-    suspend fun deleteOldCachedLocations(timestamp: Date)
+    @Query("DELETE FROM cached_locations WHERE timestamp < :timestamp")
+    suspend fun deleteOldCachedLocations(timestamp: Long)
 
     @Query("DELETE FROM cached_locations")
     suspend fun deleteAllCachedLocations()

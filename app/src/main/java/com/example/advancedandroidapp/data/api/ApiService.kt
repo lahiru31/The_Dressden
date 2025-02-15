@@ -12,6 +12,7 @@ interface ApiService {
     }
 
     // User endpoints
+    // Ensure that the login and registration processes are functioning correctly
     @POST("auth/login")
     suspend fun login(
         @Body credentials: Map<String, String>

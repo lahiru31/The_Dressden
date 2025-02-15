@@ -4,7 +4,7 @@ import java.util.concurrent.TimeUnit
 
 object Constants {
     // API Constants
-    const val BASE_URL = BuildConfig.API_BASE_URL // This will be configured in build.gradle
+    const val BASE_URL = "https://your-api-domain.com/api/" // Updated to match the API service
     const val API_TIMEOUT = 30L // seconds
     const val API_VERSION = "v1"
     

@@ -22,6 +22,7 @@ class MainRepository @Inject constructor(
     private val networkUtils: NetworkUtils
 ) {
     // User Profile Operations
+    // Ensure login process is functioning correctly
     suspend fun login(email: String, password: String): ApiResponse<User> = withContext(Dispatchers.IO) {
         try {
             if (!networkUtils.isNetworkAvailable()) {

@@ -6,7 +6,7 @@ import kotlinx.coroutines.flow.Flow
 
 @Dao
 interface UserProfileDao {
-    @Query("SELECT * FROM user_profiles WHERE userId = :userId")
+    @Query("SELECT * FROM user_profiles WHERE user_id = :userId")
     fun getUserProfile(userId: String): Flow<UserProfile?>
 
     @Query("SELECT * FROM user_profiles")
@@ -27,7 +27,7 @@ interface UserProfileDao {
     @Query("DELETE FROM user_profiles")
     suspend fun deleteAllProfiles()
 
-    @Query("SELECT COUNT(*) FROM user_profiles WHERE userId = :userId")
+    @Query("SELECT COUNT(*) FROM user_profiles WHERE user_id = :userId")
     suspend fun profileExists(userId: String): Int
 
     @Transaction

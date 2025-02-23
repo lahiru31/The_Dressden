@@ -28,21 +28,35 @@ abstract class UserDao {
 
     @Transaction
     @Query("""
-        SELECT u.*, p.* 
+        SELECT u.*, 
+               p.user_id as profile_user_id,
+               p.username,
+               p.full_name,
+               p.avatar_url,
+               p.bio,
+               p.phone_number,
+               p.updated_at as profile_updated_at
         FROM users u 
         LEFT JOIN user_profiles p ON u.id = p.user_id 
         WHERE u.id = :userId
     """)
-    abstract suspend fun getUserWithProfile(userId: String): Map<User, UserProfile?>
+    abstract suspend fun getUserWithProfile(userId: String): UserWithProfile?
 
     @Transaction
     @Query("""
-        SELECT u.*, s.* 
+        SELECT u.*, 
+               s.user_id as settings_user_id,
+               s.notifications_enabled,
+               s.dark_mode_enabled,
+               s.language,
+               s.location_tracking_enabled,
+               s.data_backup_enabled,
+               s.last_sync_timestamp
         FROM users u 
         LEFT JOIN user_settings s ON u.id = s.user_id 
         WHERE u.id = :userId
     """)
-    abstract suspend fun getUserWithSettings(userId: String): Map<User, UserSettings?>
+    abstract suspend fun getUserWithSettings(userId: String): UserWithSettings?
 
     @Transaction
     open suspend fun insertUserWithProfile(user: User, profile: UserProfile) {
@@ -56,3 +70,21 @@ abstract class UserDao {
         // UserSettingsDao will handle settings insertion
     }
 }
+
+data class UserWithProfile(
+    @Embedded val user: User,
+    @Relation(
+        parentColumn = "id",
+        entityColumn = "user_id"
+    )
+    val profile: UserProfile?
+)
+
+data class UserWithSettings(
+    @Embedded val user: User,
+    @Relation(
+        parentColumn = "id",
+        entityColumn = "user_id"
+    )
+    val settings: UserSettings?
+)

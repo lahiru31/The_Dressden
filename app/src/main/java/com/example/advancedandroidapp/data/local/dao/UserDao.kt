@@ -1,6 +1,7 @@
 package com.example.advancedandroidapp.data.local.dao
 
 import androidx.room.*
+import androidx.room.RoomWarnings
 import com.example.advancedandroidapp.data.models.User
 import com.example.advancedandroidapp.data.models.UserProfile
 import com.example.advancedandroidapp.data.models.UserSettings
@@ -24,7 +25,7 @@ interface UserDao {
     fun getAllUsers(): Flow<List<User>>
 
     @Transaction
-    @RewriteQueriesToDropUnusedColumns
+    @SuppressWarnings(RoomWarnings.CURSOR_MISMATCH)
     @Query("""
         SELECT * FROM users
         LEFT JOIN user_profiles ON users.id = user_profiles.user_id
@@ -33,7 +34,7 @@ interface UserDao {
     fun getUserWithProfile(userId: String): Flow<UserWithProfile>
 
     @Transaction
-    @RewriteQueriesToDropUnusedColumns
+    @SuppressWarnings(RoomWarnings.CURSOR_MISMATCH)
     @Query("""
         SELECT * FROM users
         LEFT JOIN user_settings ON users.id = user_settings.user_id

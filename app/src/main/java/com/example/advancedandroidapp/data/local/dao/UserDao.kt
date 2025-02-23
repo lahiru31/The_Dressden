@@ -7,68 +7,45 @@ import com.example.advancedandroidapp.data.models.UserSettings
 import kotlinx.coroutines.flow.Flow
 
 @Dao
-abstract class UserDao {
-    @Query("SELECT * FROM users")
-    abstract fun getAllUsers(): Flow<List<User>>
-
-    @Query("SELECT * FROM users WHERE id = :id")
-    abstract suspend fun getUserById(id: String): User?
-
-    @Query("SELECT * FROM users WHERE email = :email")
-    abstract suspend fun getUserByEmail(email: String): User?
-
+interface UserDao {
     @Insert(onConflict = OnConflictStrategy.REPLACE)
-    abstract suspend fun insertUser(user: User)
+    suspend fun insertUser(user: User)
 
     @Update
-    abstract suspend fun updateUser(user: User)
+    suspend fun updateUser(user: User)
 
     @Delete
-    abstract suspend fun deleteUser(user: User)
+    suspend fun deleteUser(user: User)
+
+    @Query("SELECT * FROM users WHERE id = :userId")
+    fun getUser(userId: String): Flow<User>
+
+    @Query("SELECT * FROM users")
+    fun getAllUsers(): Flow<List<User>>
 
     @Transaction
+    @RewriteQueriesToDropUnusedColumns
     @Query("""
-        SELECT u.*, 
-               p.user_id as profile_user_id,
-               p.username,
-               p.full_name,
-               p.avatar_url,
-               p.bio,
-               p.phone_number,
-               p.updated_at as profile_updated_at
-        FROM users u 
-        LEFT JOIN user_profiles p ON u.id = p.user_id 
-        WHERE u.id = :userId
+        SELECT * FROM users
+        LEFT JOIN user_profiles ON users.id = user_profiles.user_id
+        WHERE users.id = :userId
     """)
-    abstract suspend fun getUserWithProfile(userId: String): UserWithProfile?
+    fun getUserWithProfile(userId: String): Flow<UserWithProfile>
 
     @Transaction
+    @RewriteQueriesToDropUnusedColumns
     @Query("""
-        SELECT u.*, 
-               s.user_id as settings_user_id,
-               s.notifications_enabled,
-               s.dark_mode_enabled,
-               s.language,
-               s.location_tracking_enabled,
-               s.data_backup_enabled,
-               s.last_sync_timestamp
-        FROM users u 
-        LEFT JOIN user_settings s ON u.id = s.user_id 
-        WHERE u.id = :userId
+        SELECT * FROM users
+        LEFT JOIN user_settings ON users.id = user_settings.user_id
+        WHERE users.id = :userId
     """)
-    abstract suspend fun getUserWithSettings(userId: String): UserWithSettings?
+    fun getUserWithSettings(userId: String): Flow<UserWithSettings>
 
-    @Transaction
-    open suspend fun insertUserWithProfile(user: User, profile: UserProfile) {
-        insertUser(user)
-        // UserProfileDao will handle profile insertion
-    }
+    @Query("DELETE FROM users WHERE id = :userId")
+    suspend fun deleteUserById(userId: String)
 
-    @Transaction
-    open suspend fun insertUserWithSettings(user: User, settings: UserSettings) {
-        insertUser(user)
-        // UserSettingsDao will handle settings insertion
-    }
+    @Query("DELETE FROM users")
+    suspend fun deleteAllUsers()
 }
 
 data class UserWithProfile(

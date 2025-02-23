@@ -1,13 +1,13 @@
 {
   "project_info": {
-    "project_number": "503874793599",
-    "project_id": "the-dressden",
-    "storage_bucket": "the-dressden.firebasestorage.app"
+    "project_number": "74344183521",
+    "project_id": "thedressden-e2e9a",
+    "storage_bucket": "thedressden-e2e9a.firebasestorage.app"
   },
   "client": [
     {
       "client_info": {
-        "mobilesdk_app_id": "1:503874793599:android:1f100735c16bcd946c4f4a",
+        "mobilesdk_app_id": "1:74344183521:android:6497755e77d7ed3147e9a0",
         "android_client_info": {
           "package_name": "com.example.advancedandroidapp"
         }
@@ -15,7 +15,7 @@
       "oauth_client": [],
       "api_key": [
         {
-          "current_key": "AIzaSyAXaOY46K57zBvJS9PQercJ7Iro339A7KE"
+          "current_key": "AIzaSyBk9Tk3LgDx7MqLWmOoy5g4Xt8ic07lnGA"
         }
       ],
       "services": {

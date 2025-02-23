@@ -32,4 +32,13 @@ allprojects {
 
 tasks.register('clean', Delete) {
     delete rootProject.buildDir
+    delete "${rootProject.projectDir}/build"
+    delete "${rootProject.projectDir}/build/gradle-cache"
+}
+
+allprojects {
+    tasks.withType(JavaCompile) {
+        options.fork = true
+        options.incremental = true
+    }
 }

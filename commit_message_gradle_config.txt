@@ -1,0 +1,7 @@
+fix: Update Gradle configuration for better cache handling
+
+- Add comprehensive Gradle cache settings
+- Configure Java compilation options
+- Update clean task to handle cache directories
+- Disable unsafe configuration cache
+- Optimize memory and parallel execution settings

@@ -1,0 +1,4 @@
+fix: Update Gradle cache directory path
+
+- Move Gradle cache to build/.gradle-cache to avoid path length issues
+- Fix UncheckedIOException during cache operations

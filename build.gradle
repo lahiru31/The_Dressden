@@ -32,13 +32,38 @@ allprojects {
 
 tasks.register('clean', Delete) {
     delete rootProject.buildDir
-    delete "${rootProject.projectDir}/build"
-    delete "${rootProject.projectDir}/build/gradle-cache"
+    delete "${rootProject.projectDir}/.gradle-cache"
+    delete "${rootProject.projectDir}/.gradle-wrapper"
+    delete "${rootProject.projectDir}/.android-cache"
 }
 
 allprojects {
     tasks.withType(JavaCompile) {
         options.fork = true
         options.incremental = true
+    }
+
+    // Configure build cache
+    buildCache {
+        local {
+            directory = file("${rootProject.projectDir}/.gradle-cache")
+            removeUnusedEntriesAfterDays = 30
+        }
+    }
+}
+
+// Ensure cache directories exist
+tasks.register('createCacheDirs') {
+    doFirst {
+        file("${rootProject.projectDir}/.gradle-cache").mkdirs()
+        file("${rootProject.projectDir}/.gradle-wrapper").mkdirs()
+        file("${rootProject.projectDir}/.android-cache").mkdirs()
+    }
+}
+
+// Run createCacheDirs before any build task
+tasks.whenTaskAdded { task ->
+    if (task.name.contains("compile") || task.name.contains("build")) {
+        task.dependsOn('createCacheDirs')
     }
 }

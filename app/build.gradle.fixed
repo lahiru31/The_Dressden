@@ -9,12 +9,12 @@ plugins {
 
 android {
     namespace 'com.example.advancedandroidapp'
-    compileSdk 33
+    compileSdk 34
 
     defaultConfig {
         applicationId "com.example.advancedandroidapp"
         minSdk 24
-        targetSdk 33
+        targetSdk 34
         versionCode 1
         versionName "1.0"
 
@@ -61,12 +61,6 @@ android {
             '-opt-in=kotlin.RequiresOptIn',
             '-Xjvm-default=all'
         ]
-    }
-
-    packagingOptions {
-        resources {
-            excludes += '/META-INF/{AL2.0,LGPL2.1}'
-        }
     }
 }
 

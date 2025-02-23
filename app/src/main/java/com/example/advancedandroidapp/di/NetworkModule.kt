@@ -1,9 +1,12 @@
 package com.example.advancedandroidapp.di
 
 import android.content.Context
+import com.example.advancedandroidapp.BuildConfig
 import com.example.advancedandroidapp.data.api.ApiService
+import com.example.advancedandroidapp.data.api.ErrorHandlingCallAdapterFactory
 import com.example.advancedandroidapp.utils.Constants
 import com.example.advancedandroidapp.utils.NetworkUtils
+import java.io.File
 import dagger.Module
 import dagger.Provides
 import dagger.hilt.InstallIn
@@ -25,7 +28,8 @@ object NetworkModule {
     @Provides
     @Singleton
     fun provideCache(@ApplicationContext context: Context): Cache {
-        return Cache(context.cacheDir, Constants.CACHE_SIZE)
+        val cacheDir = File(context.cacheDir, "http_cache")
+        return Cache(cacheDir, Constants.CACHE_SIZE)
     }
 
     @Provides
@@ -87,6 +91,7 @@ object NetworkModule {
             .addInterceptor(authInterceptor)
             .addInterceptor(cacheInterceptor)
             .addInterceptor(loggingInterceptor)
+            .retryOnConnectionFailure(true)
             .connectTimeout(Constants.API_TIMEOUT, TimeUnit.SECONDS)
             .readTimeout(Constants.API_TIMEOUT, TimeUnit.SECONDS)
             .writeTimeout(Constants.API_TIMEOUT, TimeUnit.SECONDS)
@@ -97,9 +102,10 @@ object NetworkModule {
     @Singleton
     fun provideRetrofit(okHttpClient: OkHttpClient): Retrofit {
         return Retrofit.Builder()
-            .baseUrl("${Constants.BASE_URL}${Constants.API_VERSION}/")
+            .baseUrl(BuildConfig.API_BASE_URL)
             .client(okHttpClient)
             .addConverterFactory(GsonConverterFactory.create())
+            .addCallAdapterFactory(ErrorHandlingCallAdapterFactory())
             .build()
     }
 

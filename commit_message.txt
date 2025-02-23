@@ -1,0 +1,9 @@
+feat: Enhance network layer with improved error handling and caching
+
+- Add ErrorHandlingCallAdapterFactory for better API error handling
+- Implement custom HTTP cache directory
+- Enable retry on connection failure
+- Update API base URL configuration
+- Add proper exception handling for network errors
+
+This commit improves the network layer's reliability and error handling capabilities while fixing cache directory access issues.

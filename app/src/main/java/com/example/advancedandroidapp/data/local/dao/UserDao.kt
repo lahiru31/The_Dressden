@@ -7,42 +7,52 @@ import com.example.advancedandroidapp.data.models.UserSettings
 import kotlinx.coroutines.flow.Flow
 
 @Dao
-interface UserDao {
+abstract class UserDao {
     @Query("SELECT * FROM users")
-    fun getAllUsers(): Flow<List<User>>
+    abstract fun getAllUsers(): Flow<List<User>>
 
     @Query("SELECT * FROM users WHERE id = :id")
-    suspend fun getUserById(id: String): User?
+    abstract suspend fun getUserById(id: String): User?
 
     @Query("SELECT * FROM users WHERE email = :email")
-    suspend fun getUserByEmail(email: String): User?
+    abstract suspend fun getUserByEmail(email: String): User?
 
     @Insert(onConflict = OnConflictStrategy.REPLACE)
-    suspend fun insertUser(user: User)
+    abstract suspend fun insertUser(user: User)
 
     @Update
-    suspend fun updateUser(user: User)
+    abstract suspend fun updateUser(user: User)
 
     @Delete
-    suspend fun deleteUser(user: User)
+    abstract suspend fun deleteUser(user: User)
 
     @Transaction
-    @Query("SELECT * FROM users WHERE id = :userId")
-    suspend fun getUserWithProfile(userId: String): Map<User, UserProfile?>
+    @Query("""
+        SELECT u.*, p.* 
+        FROM users u 
+        LEFT JOIN user_profiles p ON u.id = p.user_id 
+        WHERE u.id = :userId
+    """)
+    abstract suspend fun getUserWithProfile(userId: String): Map<User, UserProfile?>
 
     @Transaction
-    @Query("SELECT * FROM users WHERE id = :userId")
-    suspend fun getUserWithSettings(userId: String): Map<User, UserSettings?>
+    @Query("""
+        SELECT u.*, s.* 
+        FROM users u 
+        LEFT JOIN user_settings s ON u.id = s.user_id 
+        WHERE u.id = :userId
+    """)
+    abstract suspend fun getUserWithSettings(userId: String): Map<User, UserSettings?>
 
     @Transaction
-    suspend fun insertUserWithProfile(user: User, profile: UserProfile) {
+    open suspend fun insertUserWithProfile(user: User, profile: UserProfile) {
         insertUser(user)
-        userProfileDao.insertUserProfile(profile)
+        // UserProfileDao will handle profile insertion
     }
 
     @Transaction
-    suspend fun insertUserWithSettings(user: User, settings: UserSettings) {
+    open suspend fun insertUserWithSettings(user: User, settings: UserSettings) {
         insertUser(user)
-        userSettingsDao.insertUserSettings(settings)
+        // UserSettingsDao will handle settings insertion
     }
 }

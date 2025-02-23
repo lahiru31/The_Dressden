@@ -20,12 +20,13 @@ import com.example.advancedandroidapp.data.models.*
         CachedLocation::class,
         OfflineAction::class
     ],
-    version = 1,
+    version = 2,
     exportSchema = true
 )
 @TypeConverters(
     DateConverter::class,
     ListConverter::class,
+    MapConverter::class,
     LocationConverter::class,
     UserProfileConverter::class
 )

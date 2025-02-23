@@ -18,12 +18,14 @@ object DatabaseProvider {
             .addMigrations(MIGRATION_1_2)
             .fallbackToDestructiveMigration()
             .build()
+            
             INSTANCE = instance
             instance
         }
     }
 
     fun destroyInstance() {
+        INSTANCE?.close()
         INSTANCE = null
     }
 }

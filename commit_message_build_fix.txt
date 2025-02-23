@@ -1,0 +1,5 @@
+fix: Update build.gradle API URL configuration
+
+- Replace Constants reference with direct URL strings in buildConfigField
+- Fix build operation failures
+- Maintain separate URLs for debug and release builds

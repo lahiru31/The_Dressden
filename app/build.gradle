@@ -33,13 +33,13 @@ android {
 
     buildTypes {
         debug {
-            buildConfigField "String", "API_BASE_URL", "\"${Constants.BASE_URL}${Constants.API_VERSION}/\""
+            buildConfigField "String", "API_BASE_URL", "\"https://dev-api.yourdomain.com/v1/\""
             manifestPlaceholders = [
                 MAPS_API_KEY: "@string/maps_api_key"
             ]
         }
         release {
-            buildConfigField "String", "API_BASE_URL", "\"${Constants.BASE_URL}${Constants.API_VERSION}/\""
+            buildConfigField "String", "API_BASE_URL", "\"https://api.yourdomain.com/v1/\""
             minifyEnabled true
             shrinkResources true
             proguardFiles getDefaultProguardFile('proguard-android-optimize.txt'), 'proguard-rules.pro'
